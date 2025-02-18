@@ -2,6 +2,23 @@ import streamlit as st
 from streamlit_modal import Modal
 import pandas as pd
 
+# Google Analytics 코드 추가
+GA_MEASUREMENT_ID = 'G-H96KS0SE20'  # 자신의 트래킹 ID로 변경하세요.
+st.markdown(
+    f"""
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H96KS0SE20"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-H96KS0SE20');
+    </script>
+    """,
+    unsafe_allow_html=True
+)
+
 # modal 객체 생성 (키와 제목 설정)
 modal = Modal(key="boot_modal", title="자세한 정보 보기")
 
