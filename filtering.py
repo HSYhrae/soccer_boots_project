@@ -7,13 +7,13 @@ GA_MEASUREMENT_ID = 'G-H96KS0SE20'  # 자신의 트래킹 ID로 변경하세요.
 st.markdown(
     f"""
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H96KS0SE20"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={GA_MEASUREMENT_ID}"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
 
-    gtag('config', 'G-H96KS0SE20');
+      gtag('config', '{GA_MEASUREMENT_ID}');
     </script>
     """,
     unsafe_allow_html=True
