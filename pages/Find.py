@@ -2,26 +2,22 @@ import streamlit as st
 from streamlit_modal import Modal
 import pandas as pd
 
-# Google Analytics 측정 ID
-GA_MEASUREMENT_ID = 'G-H96KS0SE20'  # 자신의 트래킹 ID로 변경하세요.
+# # Google Analytics 코드 추가
+# GA_MEASUREMENT_ID = 'G-H96KS0SE20'  # 자신의 트래킹 ID로 변경하세요.
+# st.markdown(
+#     f"""
+#     <!-- Google tag (gtag.js) -->
+#     <script async src="https://www.googletagmanager.com/gtag/js?id={GA_MEASUREMENT_ID}"></script>
+#     <script>
+#       window.dataLayer = window.dataLayer || [];
+#       function gtag(){{dataLayer.push(arguments);}}
+#       gtag('js', new Date());
 
-# Google Analytics 스크립트 추가
-GA_SCRIPT = f"""
-<script async src="https://www.googletagmanager.com/gtag/js?id={GA_MEASUREMENT_ID}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-  
-  // ✅ 페이지 뷰 추적 활성화
-  gtag('config', '{GA_MEASUREMENT_ID}', {{
-    'send_page_view': true
-  }});
-</script>
-"""
-
-# ✅ 앱 실행 후 가장 먼저 GA 스크립트 로드
-st.markdown(GA_SCRIPT, unsafe_allow_html=True)
+#       gtag('config', '{GA_MEASUREMENT_ID}');
+#     </script>
+#     """,
+#     unsafe_allow_html=True
+# )
 
 # modal 객체 생성 (키와 제목 설정)
 modal = Modal(key="boot_modal", title="자세한 정보 보기")
@@ -29,7 +25,7 @@ modal = Modal(key="boot_modal", title="자세한 정보 보기")
 # CSV 데이터 로드
 @st.cache_data
 def load_data():
-    df = pd.read_csv("boots.csv")
+    df = pd.read_csv("./data/boots.csv")
     return df
 
 df = load_data()
