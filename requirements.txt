@@ -7,6 +7,3 @@ streamlit-community-navigation-bar
 streamlit-option-menu
 requests
 bs4
-shutil
-pathlib
-logging
