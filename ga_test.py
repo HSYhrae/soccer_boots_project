@@ -37,9 +37,6 @@ def add_analytics_tag():
 
 add_analytics_tag()
 
-# ✅ 앱 실행 후 가장 먼저 GA 스크립트 로드
-st.markdown(GA_SCRIPT, unsafe_allow_html=True)
-
 # modal 객체 생성 (키와 제목 설정)
 modal = Modal(key="boot_modal", title="자세한 정보 보기")
 
