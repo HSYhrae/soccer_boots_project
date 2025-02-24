@@ -20,6 +20,8 @@ if "sort_order" not in st.session_state:
 if "page_number" not in st.session_state:
     st.session_state["page_number"] = 1
 
+st.write("Session State:", st.session_state)
+
 # 필터링 페이지
 def filter_page():
     st.title("⚽ 축구화 찾기")
@@ -222,8 +224,9 @@ def filter_page():
         col_prev, col_page, col_next = st.columns([1, 3, 1])  # 이전 버튼, 페이지 번호, 다음 버튼 정렬
 
         with col_prev:
-            if st.button("⬅️ 이전", key="prev_page") and st.session_state["page_number"] > 1:
-                st.session_state["page_number"] -= 1
+            if st.button("⬅️ 이전", key="prev_page"):
+                    if st.session_state["page_number"] > 1:
+                        st.session_state["page_number"] -= 1
 
         with col_page:
             st.markdown(
@@ -232,9 +235,11 @@ def filter_page():
             )
 
         with col_next:
-            if st.button("다음 ➡️", key="next_page") and st.session_state["page_number"] < total_pages:
-                st.session_state["page_number"] += 1
+            if st.button("다음 ➡️", key="next_page"):
+                if st.session_state["page_number"] < total_pages:
+                    st.session_state["page_number"] += 1
 
+    st.write("🔍 현재 Session State:", st.session_state)
 
 def show_Find():
     filter_page()
