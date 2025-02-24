@@ -22,11 +22,9 @@ st.write("Session State:", st.session_state)
 
 # 필터링 페이지
 def filter_page():
-    # Session State가 없을 경우 초기화 (다시 한 번 보장)
-    if "sort_order" not in st.session_state:
-        st.session_state["sort_order"] = "가나다순"
-    if "page_number" not in st.session_state:
-        st.session_state["page_number"] = 1
+    # Session State가 없을 경우 초기화
+    st.session_state.setdefault("sort_order", "가나다순")
+    st.session_state.setdefault("page_number", 1)
 
     st.title("⚽ 축구화 찾기")
 
