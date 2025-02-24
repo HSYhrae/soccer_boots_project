@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="Findboots", initial_sidebar_state='auto')
+st.set_page_config(page_title="Findboots", initial_sidebar_state='expanded')
 
 import os
 from streamlit_navigation_bar import st_navbar
@@ -13,7 +13,7 @@ st.logo('image/logo.png')
 st.html("""
   <style>
     [alt=Logo] {
-      height: 5rem;
+      height: 3rem;
     }
   </style>
         """)
