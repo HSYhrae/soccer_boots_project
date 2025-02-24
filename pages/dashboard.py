@@ -1,6 +1,7 @@
 import streamlit as st
 
 def show_dashboard():
+    st.query_params["pages"] = "대시보드"
     st.markdown("[![image](https://github.com/user-attachments/assets/b8113fff-aec4-4c98-bc35-a10b55e7ed8f)](https://public.tableau.com/app/profile/seungwoo.lee5575/viz/_17315683602050/2_1)")
     st.write('👆 해당 태블로 이미지를 누르시면 대시보드를 이용할 수 있습니다.')
 
