@@ -242,6 +242,7 @@ def filter_page():
     st.write("🔍 현재 Session State:", st.session_state)
 
 def show_Find():
+    st.query_params["pages"] = "축구화"
     filter_page()
 
     

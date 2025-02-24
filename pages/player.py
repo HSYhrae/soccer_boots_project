@@ -138,6 +138,7 @@ def main():
                 st.write("선수를 찾을 수 없습니다.")
 
 def show_player():
+    st.query_params["pages"] = "축구선수"
     main()
 
 
