@@ -173,3 +173,5 @@ cython_debug/
 # 보안 관련 파일
 *.pem
 *.ppk
+
+nohup.out
