@@ -12,11 +12,9 @@ def load_data():
 
 df = load_data()
 
-# 정렬 옵션 저장 (초기화)
+# Session State 초기화 (최초 실행 시 설정)
 if "sort_order" not in st.session_state:
     st.session_state["sort_order"] = "가나다순"
-
-# 페이지 번호 저장 (초기화)
 if "page_number" not in st.session_state:
     st.session_state["page_number"] = 1
 
@@ -24,11 +22,9 @@ st.write("Session State:", st.session_state)
 
 # 필터링 페이지
 def filter_page():
-    # 정렬 옵션 저장 (초기화)
+    # Session State가 없을 경우 초기화 (다시 한 번 보장)
     if "sort_order" not in st.session_state:
         st.session_state["sort_order"] = "가나다순"
-
-    # 페이지 번호 저장 (초기화)
     if "page_number" not in st.session_state:
         st.session_state["page_number"] = 1
 
@@ -250,15 +246,12 @@ def filter_page():
     st.write("🔍 현재 Session State:", st.session_state)
 
 def show_Find():
-    # 정렬 옵션 저장 (초기화)
+    # Session State가 초기화되지 않은 경우 대비
     if "sort_order" not in st.session_state:
         st.session_state["sort_order"] = "가나다순"
-
-    # 페이지 번호 저장 (초기화)
     if "page_number" not in st.session_state:
         st.session_state["page_number"] = 1
-        
+
     st.query_params["pages"] = "축구화"
     filter_page()
-
     
