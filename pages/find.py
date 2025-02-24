@@ -25,7 +25,7 @@ def filter_page():
     # Session State가 없을 경우 초기화
     st.session_state.setdefault("sort_order", "가나다순")
     st.session_state.setdefault("page_number", 1)
-    
+
     st.title("⚽ 축구화 찾기")
 
     # 필터링 UI (사이드바)
@@ -242,6 +242,11 @@ def filter_page():
 
 def show_Find():
     st.query_params["pages"] = "축구화"
+
+    # ✅ Session State 안전하게 초기화
+    st.session_state.setdefault("sort_order", "가나다순")
+    st.session_state.setdefault("page_number", 1)
+    
     filter_page()
 
     
