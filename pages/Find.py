@@ -24,6 +24,14 @@ st.write("Session State:", st.session_state)
 
 # 필터링 페이지
 def filter_page():
+    # 정렬 옵션 저장 (초기화)
+    if "sort_order" not in st.session_state:
+        st.session_state["sort_order"] = "가나다순"
+
+    # 페이지 번호 저장 (초기화)
+    if "page_number" not in st.session_state:
+        st.session_state["page_number"] = 1
+
     st.title("⚽ 축구화 찾기")
 
     # 필터링 UI (사이드바)
@@ -242,6 +250,14 @@ def filter_page():
     st.write("🔍 현재 Session State:", st.session_state)
 
 def show_Find():
+    # 정렬 옵션 저장 (초기화)
+    if "sort_order" not in st.session_state:
+        st.session_state["sort_order"] = "가나다순"
+
+    # 페이지 번호 저장 (초기화)
+    if "page_number" not in st.session_state:
+        st.session_state["page_number"] = 1
+        
     st.query_params["pages"] = "축구화"
     filter_page()
 
