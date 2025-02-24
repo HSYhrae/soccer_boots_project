@@ -247,5 +247,12 @@ def filter_page():
 
 def show_Find():
     st.query_params["pages"] = "축구화"
+
+    # Session State가 초기화되지 않은 경우 대비
+    if "sort_order" not in st.session_state:
+        st.session_state["sort_order"] = "가나다순"
+    if "page_number" not in st.session_state:
+        st.session_state["page_number"] = 1
+
     filter_page()
     
