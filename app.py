@@ -19,13 +19,7 @@ st.markdown(
 
 # 네비게이션 바에 표시할 페이지 이름
 pages = ["홈", "축구화", "축구선수","대시보드"]
-# st.logo('image/logo.png', size = 'Large', icon_image = 'image/logo.png')
-# 로고를 클릭하면 새로고침 (JavaScript 사용)
-st.sidebar.markdown("""
-    <a href="#" onclick="location.reload();">
-        <img src="image/logo.png" width="200">
-    </a>
-""", unsafe_allow_html=True)
+st.logo('image/logo.png', size = 'Large', icon_image = 'image/logo.png')
 
 # 네비게이션 바 스타일 설정 (원하는 대로 수정 가능)
 styles = {
