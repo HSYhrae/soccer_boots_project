@@ -19,12 +19,7 @@ st.markdown(
 
 # 네비게이션 바에 표시할 페이지 이름
 pages = ["홈", "축구화", "축구선수","대시보드"]
-# st.logo('image/logo.png', size = 'Large', link = 'http://54.79.9.198:8501/',icon_image = 'image/logo.png')
-# 로고를 사이드바에 표시하면서 클릭하면 새로고침
-if st.sidebar.button("🏠 홈", use_container_width=True):
-    st.experimental_rerun()
-
-st.sidebar.image("image/logo.png", use_column_width=True)
+st.logo('image/logo.png', size = 'Large', icon_image = 'image/logo.png')
 
 # 네비게이션 바 스타일 설정 (원하는 대로 수정 가능)
 styles = {
