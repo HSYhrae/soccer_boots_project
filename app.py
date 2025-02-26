@@ -1,6 +1,8 @@
 import streamlit as st
 
-st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
+st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto'
+# , layout="wide"
+)
 
 import os
 from streamlit_navigation_bar import st_navbar
