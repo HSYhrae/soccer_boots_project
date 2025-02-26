@@ -19,24 +19,13 @@ st.markdown(
 
 # 네비게이션 바에 표시할 페이지 이름
 pages = ["홈", "축구화", "축구선수","대시보드"]
-st.logo('image/logo.png', size = 'Large', link = 'http://54.79.9.198:8501/',icon_image = 'image/logo.png')
-# st.markdown(
-#     """
-#     <style>
-#         .logo-container {
-#             display: flex;
-#             justify-content: center;
-#             margin-bottom: 20px;
-#         }
-#     </style>
-#     <div class="logo-container">
-#         <a href="/" onclick="window.location.href='/'">
-#             <img src="image/logo.png" width="120">
-#         </a>
-#     </div>
-#     """,
-#     unsafe_allow_html=True
-# )
+# st.logo('image/logo.png', size = 'Large', link = 'http://54.79.9.198:8501/',icon_image = 'image/logo.png')
+# HTML + JavaScript 코드 삽입
+st.markdown("""
+    <a href="/" style="display: flex; justify-content: center;">
+        <img src="image/logo.png" alt="Logo" width="100">
+    </a>
+""", unsafe_allow_html=True)
 
 # 네비게이션 바 스타일 설정 (원하는 대로 수정 가능)
 styles = {
