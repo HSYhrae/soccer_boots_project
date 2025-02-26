@@ -5,7 +5,14 @@ def show_home():
     st.query_params["pages"] = "홈"
 # 제목 중앙 정렬
     st.markdown("<h1 style='text-align: center; font-size: 50px;'>Soccerly-축구하게?</h1>", unsafe_allow_html=True)
-    st.image("image/soccer_image.jpg", width=300)
+    st.markdown(
+    """
+    <div style="text-align:center;">
+        <img src="image/soccer_image.jpg" width="800">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
     # 사용설명버튼 스타일 개선
     st.markdown("""
         <div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; text-align: center; margin: 10px 0;'>
