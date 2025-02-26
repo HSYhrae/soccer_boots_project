@@ -6,6 +6,16 @@ import os
 from streamlit_navigation_bar import st_navbar
 import pages as pg  
 
+st.markdown(
+    """
+    <style>
+        body {
+            overflow: auto !important;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # 네비게이션 바에 표시할 페이지 이름
 pages = ["홈", "축구화", "축구선수","대시보드"]
