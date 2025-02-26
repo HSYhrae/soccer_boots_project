@@ -8,7 +8,7 @@ def show_home():
     
     col1, col2, col3 = st.columns([1, 2, 1])  # 가운데 정렬을 위한 컬럼 분배
     with col2:  # 가운데 컬럼에 이미지 넣기
-        st.image("image/soccer_image.jpg", width=800)
+        st.image("image/soccer_image.jpg", width=1600)
 
     # 사용설명버튼 스타일 개선
     st.markdown("""
