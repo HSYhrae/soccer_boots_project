@@ -2,20 +2,19 @@ import streamlit as st
 
 st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
 
+st.markdown("""
+    <style>
+    /* 해당 요소의 overflow를 auto로 변경 */
+    div[data-testid="stVerticalBlockBorderWrapper"] {
+        overflow: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 import os
 from streamlit_navigation_bar import st_navbar
 import pages as pg  
-
-st.markdown(
-    """
-    <style>
-        body {
-            overflow: auto !important;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # 네비게이션 바에 표시할 페이지 이름
 pages = ["홈", "축구화", "축구선수","대시보드"]
