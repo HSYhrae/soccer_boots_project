@@ -51,6 +51,14 @@ options = {
     "use_padding": True,
 }
 
+st.markdown("""
+<style>
+button[data-testid="stBaseButton-headerNoPadding"] {
+    background-color: red !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # 네비게이션 바 생성: 선택한 페이지 이름이 반환됩니다.
 page = st_navbar(
     pages,
