@@ -60,6 +60,17 @@ options = {
 }
 
 st.markdown("""
+    <style>
+    ul[data-v-1d8bbd58] {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+
+st.markdown("""
 <style>
 button[data-testid="stBaseButton-headerNoPadding"] {
     background-color: red !important;
@@ -81,6 +92,8 @@ functions = {
     "Player": pg.show_player,
     "Dashboard":pg.show_dashboard
 }
+
+
 
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
 go_to = functions.get(page)
