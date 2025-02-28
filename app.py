@@ -6,7 +6,7 @@ st.markdown("""
 <style>
 .st-emotion-cache-13k62yr {
     overflow: visible !important;
-    webkit-overflow-scrolling: touch !important;
+    -webkit-overflow-scrolling: touch !important;
 }
 </style>
 """, unsafe_allow_html=True)
