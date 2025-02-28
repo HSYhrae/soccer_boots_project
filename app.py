@@ -12,6 +12,15 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
+st.markdown("""
+    <style>
+    /* 전체 스크롤바 배경색을 갈색으로 설정 */
+    ::-webkit-scrollbar {
+        background-color: brown !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 import os
 from streamlit_navigation_bar import st_navbar
 import pages as pg  
