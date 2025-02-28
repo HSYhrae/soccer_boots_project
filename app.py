@@ -3,14 +3,13 @@ import streamlit as st
 st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
 
 st.markdown("""
-    <style>
-    /* 해당 요소의 overflow를 auto로 변경 */
-    div[data-testid="stVerticalBlockBorderWrapper"] {
-        overflow: auto;
-        -webkit-overflow-scrolling: touch !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+<style>
+.st-emotion-cache-13k62yr {
+    overflow: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 st.markdown("""
     <style>
