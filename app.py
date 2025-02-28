@@ -66,10 +66,10 @@ page = st_navbar(
 
 # 각 페이지에 해당하는 함수 매핑
 functions = {
-    "홈": pg.show_home,
-    "축구화": pg.show_Find,
-    "축구선수": pg.show_player,
-    "대시보드":pg.show_dashboard
+    "Home": pg.show_home,
+    "Boots": pg.show_Find,
+    "Player": pg.show_player,
+    "Dashboard":pg.show_dashboard
 }
 
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
