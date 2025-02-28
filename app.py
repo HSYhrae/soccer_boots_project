@@ -4,13 +4,19 @@ st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="
 
 st.markdown("""
 <style>
-.st-emotion-cache-13k62yr {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
+/* 상위 컨테이너의 pointer-events를 auto로 변경 /
+div[data-testid="stAppViewContainer"] {
+    pointer-events: auto !important;
+}
+
+/ 메인 영역에 명시적 높이와 스크롤 설정 적용 /
+section.stMain {
+    height: 100vh !important;
     overflow: auto !important;
-    -webkit-box-align: center !important;
-    align-items: center !important;
+    -webkit-overflow-scrolling: touch !important;
+    / 필요시 flex 레이아웃으로 내부 요소 배치 */
+    display: flex;
+    flex-direction: column;
 }
 </style>
 """, unsafe_allow_html=True)
