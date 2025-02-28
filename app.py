@@ -1,11 +1,11 @@
 import streamlit as st
 
-st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
+st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto')
 
 st.markdown("""
 <style>
 .st-emotion-cache-13k62yr {
-    overflow: visible !important;
+    overflow: auto !important;
     -webkit-overflow-scrolling: touch !important;
 }
 </style>
