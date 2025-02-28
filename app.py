@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto')
+st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
 
 st.markdown("""
     <style>
