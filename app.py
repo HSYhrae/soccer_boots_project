@@ -3,13 +3,12 @@ import streamlit as st
 st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
 
 st.markdown("""
-    <style>
-    .st-emotion-cache-13k62yr {
-        overflow-y: scroll !important;
-        overflow-x: hidden !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+<style>
+.st-emotion-cache-13k62yr {
+    scroll-behavior: smooth !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 import os
 from streamlit_navigation_bar import st_navbar
