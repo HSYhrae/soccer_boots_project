@@ -6,7 +6,7 @@ st.markdown("""
     <style>
     /* 해당 요소의 overflow를 auto로 변경 */
     div[data-testid="stVerticalBlockBorderWrapper"] {
-        overflow: visible;
+        overflow: auto;
         -webkit-overflow-scrolling: touch !important;
     }
     </style>
