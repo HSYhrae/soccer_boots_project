@@ -5,10 +5,12 @@ st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="
 st.markdown("""
 <style>
 .st-emotion-cache-13k62yr {
-    overflow-y: scroll !important;
-    overflow-x: hidden !important;
-    scroll-behavior: smooth !important;
-    -webkit-overflow-scrolling: touch !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    overflow: auto !important;
+    -webkit-box-align: center !important;
+    align-items: center !important;
 }
 </style>
 """, unsafe_allow_html=True)
