@@ -4,19 +4,13 @@ st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="
 
 st.markdown("""
 <style>
-/* 상위 컨테이너의 pointer-events를 auto로 변경 /
-div[data-testid="stAppViewContainer"] {
-    pointer-events: auto !important;
-}
-
-/ 메인 영역에 명시적 높이와 스크롤 설정 적용 /
-section.stMain {
-    height: 100vh !important;
-    overflow: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    / 필요시 flex 레이아웃으로 내부 요소 배치 */
-    display: flex;
-    flex-direction: column;
+.st-emotion-cache-bm2z3a {
+    height: 100vh !important;               /* 전체 화면 높이를 할당 /
+    overflow: auto !important;              / 콘텐츠가 넘칠 때 스크롤이 나타나도록 설정 /
+    -webkit-overflow-scrolling: touch !important; / iOS 모멘텀 스크롤 활성화 /
+    display: flex !important;               / flex 컨테이너로 설정하여 내부 요소 정렬 제어 /
+    flex-direction: column !important;
+    pointer-events: auto !important;        / 터치 이벤트가 정상적으로 전달되도록 설정 */
 }
 </style>
 """, unsafe_allow_html=True)
