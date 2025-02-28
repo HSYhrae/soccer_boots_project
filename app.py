@@ -3,22 +3,33 @@ import streamlit as st
 st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto')
 
 st.markdown("""
-<style>
-.st-emotion-cache-13k62yr {
-    overflow: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-}
-</style>
-""", unsafe_allow_html=True)
+                <html>
+                    <head>
+                    <style>
+                        ::-webkit-scrollbar {
+                            width: 10px;
+                            }
 
-st.markdown("""
-    <style>
-    /* 전체 스크롤바 배경색을 갈색으로 설정 */
-    ::-webkit-scrollbar {
-        background-color: brown !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+                            /* Track /
+                            ::-webkit-scrollbar-track {
+                            background: #f1f1f1;
+                            }
+
+                            / Handle /
+                            ::-webkit-scrollbar-thumb {
+                            background: #888;
+                            }
+
+                            / Handle on hover */
+                            ::-webkit-scrollbar-thumb:hover {
+                            background: #555;
+                            }
+                    </style>
+                    </head>
+                    <body>
+                    </body>
+                </html>
+            """, unsafe_allow_html=True)
 
 import os
 from streamlit_navigation_bar import st_navbar
