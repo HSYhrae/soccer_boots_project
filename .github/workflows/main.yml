@@ -14,9 +14,9 @@ jobs:
       - name: ssh to ec2
         uses: appleboy/ssh-action@master
         with:
-          key: ${{ secrets.SOCCER_SSH_KEY }}
-          host: ${{ secrets.SOCCER_SECRET }}
-          username: ${{ secrets.SOCCER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
           script: |
             cd soccer_boots_project
             git pull
