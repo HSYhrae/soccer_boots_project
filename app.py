@@ -7,14 +7,14 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css?family=Poor+Story:400');
 
-/* 모든 요소에 Poor Story 폰트 적용 (네비게이션 바 제외) /
+/* 모든 요소에 Poor Story 폰트 적용 (네비게이션 바 제외) */
 body, .stButton button, .stTextInput input, .stSelectbox, .stMultiselect,
 h1, h2, h3, h4, h5, h6, p, div:not([data-v-96be9aef]), span:not([data-v-96be9aef]), 
 li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
     font-family: 'Poor Story', cursive !important;
 }
 
-/ Streamlit 특정 클래스에 폰트 적용 /
+/* Streamlit 특정 클래스에 폰트 적용 */
 .st-emotion-cache-bm2z3a {
     min-height: 100vh !important;
     overflow: auto !important;
@@ -25,28 +25,15 @@ li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
     font-family: 'Poor Story', cursive !important;
 }
 
-/ 이미지 크기 조정 /
+/* 이미지 크기 조정 */
 [data-testid="stImage"] img {
     max-height: 5rem;
 }
 
-/ 버튼 스타일 /
+/* 버튼 스타일 */
 button[data-testid="stBaseButton-headerNoPadding"] {
     background-color: red !important;
     font-family: 'Poor Story', cursive !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<style>
-.st-emotion-cache-bm2z3a {
-    min-height: 100vh !important; / 또는 height: -webkit-fill-available !important; */
-    overflow: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    display: flex !important;
-    flex-direction: column !important;
-    pointer-events: auto !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -123,11 +110,7 @@ functions = {
     "Dashboard":pg.show_dashboard
 }
 
-
-
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
 go_to = functions.get(page)
 if go_to:
     go_to()
-
-
