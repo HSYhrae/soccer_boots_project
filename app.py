@@ -2,15 +2,51 @@ import streamlit as st
 
 st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
 
+# 폰트 적용 (네비게이션 바 제외)
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css?family=Poor+Story:400');
+
+/* 모든 요소에 Poor Story 폰트 적용 (네비게이션 바 제외) /
+body, .stButton button, .stTextInput input, .stSelectbox, .stMultiselect,
+h1, h2, h3, h4, h5, h6, p, div:not([data-v-96be9aef]), span:not([data-v-96be9aef]), 
+li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
+    font-family: 'Poor Story', cursive !important;
+}
+
+/ Streamlit 특정 클래스에 폰트 적용 /
+.st-emotion-cache-bm2z3a {
+    min-height: 100vh !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: flex !important;
+    flex-direction: column !important;
+    pointer-events: auto !important;
+    font-family: 'Poor Story', cursive !important;
+}
+
+/ 이미지 크기 조정 /
+[data-testid="stImage"] img {
+    max-height: 5rem;
+}
+
+/ 버튼 스타일 /
+button[data-testid="stBaseButton-headerNoPadding"] {
+    background-color: red !important;
+    font-family: 'Poor Story', cursive !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 st.markdown("""
 <style>
 .st-emotion-cache-bm2z3a {
-    height: 100vh !important;               /* 전체 화면 높이를 할당 /
-    overflow: auto !important;              / 콘텐츠가 넘칠 때 스크롤이 나타나도록 설정 /
-    -webkit-overflow-scrolling: touch !important; / iOS 모멘텀 스크롤 활성화 /
-    display: flex !important;               / flex 컨테이너로 설정하여 내부 요소 정렬 제어 /
+    min-height: 100vh !important; / 또는 height: -webkit-fill-available !important; */
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: flex !important;
     flex-direction: column !important;
-    pointer-events: auto !important;        / 터치 이벤트가 정상적으로 전달되도록 설정 */
+    pointer-events: auto !important;
 }
 </style>
 """, unsafe_allow_html=True)
