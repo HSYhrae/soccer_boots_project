@@ -52,6 +52,8 @@ import pages as pg
 
 # 네비게이션 바에 표시할 페이지 이름
 pages = ["Home", "Boots", "Player","Dashboard"]
+st.logo('image/logo.png', size = 'Large', icon_image = 'image/logo.png')
+
 # 네비게이션 바 스타일 설정 (원하는 대로 수정 가능)
 styles = {
     "nav": {
