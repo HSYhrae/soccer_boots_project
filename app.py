@@ -2,6 +2,8 @@ import streamlit as st
 
 st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
 
+st.query_params["pages"] = "홈"
+
 # 폰트 적용 (네비게이션 바 제외)
 st.markdown("""
 <style>
