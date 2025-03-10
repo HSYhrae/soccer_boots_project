@@ -101,7 +101,7 @@ st.markdown("""
 st.markdown("""
 <style>
 button[data-testid="stBaseButton-headerNoPadding"] {
-    background-color: "#d3d3d3";
+    background-color: "#d3d3d3" !important;
 }
 </style>
 """, unsafe_allow_html=True)
