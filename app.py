@@ -100,8 +100,11 @@ st.markdown("""
 
 st.markdown("""
 <style>
-button[data-testid="stBaseButton-headerNoPadding"] {
-    background-color: "#d3d3d3" !important;
+    /* Streamlit 기본 헤더 버튼 스타일 변경 */
+    button[data-testid="stBaseButton-headerNoPadding"] {
+        background-color: #d3d3d3 !important; /* 배경색 변경 */
+        border: none !important;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
