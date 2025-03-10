@@ -5,49 +5,49 @@ st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="
 st.query_params["pages"] = "홈"
 
 
-# 폰트 적용 (네비게이션 바 제외)
-st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css?family=Poor+Story:400');
+# # 폰트 적용 (네비게이션 바 제외)
+# st.markdown("""
+# <style>
+# @import url('https://fonts.googleapis.com/css?family=Poor+Story:400');
 
-/* 모든 요소에 Poor Story 폰트 적용 (네비게이션 바 제외) */
-body, .stButton button, .stTextInput input, .stSelectbox, .stMultiselect,
-h1, h2, h3, h4, h5, h6, p, div:not([data-v-96be9aef]), span:not([data-v-96be9aef]), 
-li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
-    font-family: 'Poor Story', cursive !important;
-}
+# /* 모든 요소에 Poor Story 폰트 적용 (네비게이션 바 제외) */
+# body, .stButton button, .stTextInput input, .stSelectbox, .stMultiselect,
+# h1, h2, h3, h4, h5, h6, p, div:not([data-v-96be9aef]), span:not([data-v-96be9aef]), 
+# li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
+#     font-family: 'Poor Story', cursive !important;
+# }
 
-/* Streamlit 특정 클래스에 폰트 적용 */
-.st-emotion-cache-bm2z3a {
-    min-height: 100vh !important;
-    overflow: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    display: flex !important;
-    flex-direction: column !important;
-    pointer-events: auto !important;
-    font-family: 'Poor Story', cursive !important;
-}
+# /* Streamlit 특정 클래스에 폰트 적용 */
+# .st-emotion-cache-bm2z3a {
+#     min-height: 100vh !important;
+#     overflow: auto !important;
+#     -webkit-overflow-scrolling: touch !important;
+#     display: flex !important;
+#     flex-direction: column !important;
+#     pointer-events: auto !important;
+#     font-family: 'Poor Story', cursive !important;
+# }
 
-/* 이미지 컨테이너 스타일 추가 */
-[data-testid="stImageContainer"] {
-    display: flex !important;
-    justify-content: center !important;
-}
+# /* 이미지 컨테이너 스타일 추가 */
+# [data-testid="stImageContainer"] {
+#     display: flex !important;
+#     justify-content: center !important;
+# }
 
-/* 전체 화면 프레임 스타일 */
-[data-testid="stFullScreenFrame"] {
-    display: flex !important;
-    justify-content: center !important;
-    width: 100% !important;
-}
+# /* 전체 화면 프레임 스타일 */
+# [data-testid="stFullScreenFrame"] {
+#     display: flex !important;
+#     justify-content: center !important;
+#     width: 100% !important;
+# }
 
-/* 버튼 스타일 */
-button[data-testid="stBaseButton-headerNoPadding"] {
-    background-color: red !important;
-    font-family: 'Poor Story', cursive !important;
-}
-</style>
-""", unsafe_allow_html=True)
+# /* 버튼 스타일 */
+# button[data-testid="stBaseButton-headerNoPadding"] {
+#     background-color: red !important;
+#     font-family: 'Poor Story', cursive !important;
+# }
+# </style>
+# """, unsafe_allow_html=True)
 
 import os
 from streamlit_navigation_bar import st_navbar
