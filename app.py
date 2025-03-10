@@ -131,8 +131,6 @@ custom_css = """
 # CSS 삽입
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# 테스트용 버튼
-st.write('<div class="navbar-text">Dashboard</div>', unsafe_allow_html=True)
 
 # 각 페이지에 해당하는 함수 매핑
 functions = {
