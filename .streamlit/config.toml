@@ -2,3 +2,4 @@
 primaryColor = "#FF6347"  # 주요 색상 (버튼, 링크 등)
 backgroundColor = "#F0F0F0"  # 기본 배경색 (연한 회색)
 secondaryBackgroundColor = "#D3D3D3"  # 사이드바 배경색
+font = "monospace"  # 폰트 설정
