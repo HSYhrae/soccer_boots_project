@@ -99,7 +99,7 @@ st.markdown("""
 
 
 st.markdown("""
-<style>
+    <style>
     /* Streamlit 기본 헤더 버튼 스타일 변경 */
     button[data-testid="stBaseButton-headerNoPadding"] {
         background-color: #d3d3d3 !important; /* 배경색 변경 */
@@ -115,6 +115,24 @@ page = st_navbar(
     styles=styles,
     options=options,
 ) # 선택한 페이지 이름을 출력 (디버깅 용도)
+
+# Google Fonts에서 'Poor Story' 폰트 가져오기
+custom_css = """
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+
+    /* .navbar-text 클래스에 폰트 적용 */
+    .navbar-text {
+        font-family: 'Poor Story', cursive !important;
+    }
+</style>
+"""
+
+# CSS 삽입
+st.markdown(custom_css, unsafe_allow_html=True)
+
+# 테스트용 버튼
+st.write('<div class="navbar-text">Dashboard</div>', unsafe_allow_html=True)
 
 # 각 페이지에 해당하는 함수 매핑
 functions = {
