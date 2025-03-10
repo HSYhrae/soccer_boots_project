@@ -48,9 +48,12 @@ button[data-testid="stBaseButton-headerNoPadding"] {
 }
 
 /* .navbar-text 클래스에 폰트 적용 */
-.navbar .navbar-text {
+.navbar-text {
     font-family: 'Poor Story', cursive !important;
     color: white; /* 텍스트 색상도 설정할 수 있습니다. */
+    display: inline !important; /* 기존 스타일을 유지 */
+    vertical-align: middle !important; /* 기존 스타일을 유지 */
+    margin-left: 0.35em !important; /* 기존 스타일을 유지 */
 }
 </style>
 """, unsafe_allow_html=True)
