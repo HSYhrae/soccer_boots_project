@@ -46,6 +46,11 @@ button[data-testid="stBaseButton-headerNoPadding"] {
     background-color: #d3d3d3 !important;
     font-family: 'Poor Story', cursive !important;
 }
+
+/* .navbar-text 클래스에 폰트 적용 */
+.navbar-text {
+    font-family: 'Poor Story', cursive !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
