@@ -8,11 +8,6 @@ from bs4 import BeautifulSoup
 df_f = pd.read_csv('./data/football_boots_feature.csv')
 
 # 축구화 데이터 크롤링
-import re
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
-
 def extract_main_image(soup):
     img_tag = soup.select_one('.itemDetailPage-main-img img')
     if img_tag:
@@ -178,3 +173,14 @@ def extract_silo(title):
 
 # 'silo' 컬럼 생성
 df_b['silo'] = df_b['title'].apply(extract_silo)
+
+# 중복된 title 중에서 price가 가장 큰 값 남기기
+df_b = df_b.loc[df_b.groupby('title')['original_price'].idxmax()]
+
+df_f.loc[df_f['silo_kor'] == '엑스', 'silo_kor'] = 'X'
+
+# 조인 실행
+result = pd.merge(df_b, df_f, left_on='silo', right_on='silo_kor', how='left')
+
+# 파일 내보내기기
+result.to_csv('./data/boots.csv', index=False)
