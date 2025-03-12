@@ -67,7 +67,7 @@ styles = {
     "span": {
         "color": "white",
         "padding": "14px",
-        "font-family": "'Poor Story', cursive",
+        "font-family": "'math', cursive",
     },
     "active": {
         "background-color": "white",
