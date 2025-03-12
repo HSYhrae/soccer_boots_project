@@ -7,16 +7,16 @@ st.query_params["pages"] = "홈"
 # 폰트 적용 (네비게이션 바 제외)
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css?family=Poor+Story:400');
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400');
 
-/* 모든 요소에 Poor Story 폰트 적용 (네비게이션 바 제외) */
+/* 모든 요소에 Nanum Gothic Coding 폰트 적용 (네비게이션 바 제외) /
 body, .stButton button, .stTextInput input, .stSelectbox, .stMultiselect,
 h1, h2, h3, h4, h5, h6, p, div:not([data-v-96be9aef]), span:not([data-v-96be9aef]), 
 li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
-    font-family: 'Poor Story', cursive !important;
+    font-family: 'Nanum Gothic Coding', monospace !important;
 }
 
-/* Streamlit 특정 클래스에 폰트 적용 */
+/ Streamlit 특정 클래스에 폰트 적용 /
 .st-emotion-cache-bm2z3a {
     min-height: 100vh !important;
     overflow: auto !important;
@@ -24,7 +24,7 @@ li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
     display: flex !important;
     flex-direction: column !important;
     pointer-events: auto !important;
-    font-family: 'Poor Story', cursive !important;
+    font-family: 'Nanum Gothic Coding', monospace !important;
 }
 
 /* 이미지 컨테이너 스타일 추가 */
@@ -40,12 +40,11 @@ li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
     width: 100% !important;
 }
 
-/* 버튼 스타일 */
+/ 버튼 스타일 */
 button[data-testid="stBaseButton-headerNoPadding"] {
-    background-color: #d3d3d3 !important;
-    font-family: 'Poor Story', cursive !important;
+    background-color: red !important;
+    font-family: 'Nanum Gothic Coding', monospace !important;
 }
-
 </style>
 """, unsafe_allow_html=True)
 
