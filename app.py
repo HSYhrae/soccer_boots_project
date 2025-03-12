@@ -57,6 +57,18 @@ pages = ["Home", "Boots", "Player","Dashboard"]
 st.logo('image/logo.png', size = 'Large', icon_image = 'image/logo.png')
 
 # 네비게이션 바 스타일 설정 (원하는 대로 수정 가능)
+st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Poor+Story:400');
+    
+    .navbar-span {
+        font-family: 'Poor Story', sans-serif;
+        color: white;
+        padding: 5px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 styles = {
     "nav": {
         "background-color": "#d3d3d3",
@@ -67,7 +79,7 @@ styles = {
     "span": {
         "color": "white",
         "padding": "5px",
-        "font-family": "emoji",
+        "font-family": "Poor Story, sans-serif",
     },
     "active": {
         "background-color": "white",
