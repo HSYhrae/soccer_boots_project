@@ -87,17 +87,6 @@ options = {
     "use_padding": True,
 }
 
-st.markdown("""
-    <style>
-    ul[data-v-1d8bbd58] {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-
 # 네비게이션 바 생성: 선택한 페이지 이름이 반환됩니다.
 page = st_navbar(
     pages,
