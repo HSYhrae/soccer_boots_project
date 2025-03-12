@@ -194,7 +194,7 @@ def filter_page():
             with modal.container():
                 row = st.session_state.get("modal_data", None)
                 if row is not None:
-                    st.image(row["image_url"], width=300)
+                    st.image(row["image_url"], width=200)
                     st.write(f"### {row['title']}")
                     # 각 정보의 존재 여부에 따라 표시
                     price_display = f"💰 가격: {row['sale_price']}원" if pd.notna(row['sale_price']) else "💰 가격: ❌"
