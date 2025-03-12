@@ -66,7 +66,7 @@ styles = {
     },
     "span": {
         "color": "white",
-        "padding": "14px",
+        "padding": "5px",
         "font-family": "emoji",
     },
     "active": {
