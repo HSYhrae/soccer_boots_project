@@ -63,7 +63,7 @@ styles = {
         "background-color": "#d3d3d3",
     },
     "div": {
-        "max-width": "20rem",
+        "max-width": "5rem",
     },
     "span": {
         "color": "white",
