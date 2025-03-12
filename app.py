@@ -67,7 +67,7 @@ styles = {
     "span": {
         "color": "white",
         "padding": "14px",
-        "font-family": "math",
+        "font-family": "fantasy",
     },
     "active": {
         "background-color": "white",
