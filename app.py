@@ -67,12 +67,12 @@ styles = {
     "span": {
         "color": "white",
         "padding": "14px",
-        "font-family": "fantasy",
+        "font-family": "emoji",
     },
     "active": {
         "background-color": "white",
         "color": "var(--text-color)",
-        "font-weight": "normal",
+        "font-weight": "bold",
         "padding": "14px",
     },
     "hover": {
