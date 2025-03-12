@@ -62,7 +62,7 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css?family=Poor+Story:400');
     
     .navbar-span {
-        font-family: 'Poor Story', sans-serif;
+        font-family: 'Poor Story';
         color: white;
         padding: 5px;
     }
@@ -79,7 +79,7 @@ styles = {
     "span": {
         "color": "white",
         "padding": "5px",
-        "font-family": "Poor Story, sans-serif",
+        "font-family": "Poor Story",
     },
     "active": {
         "background-color": "white",
