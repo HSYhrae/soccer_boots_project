@@ -55,7 +55,7 @@ import pages as pg
 
 # 네비게이션 바에 표시할 페이지 이름
 pages = ["Home", "Boots", "Player","Dashboard"]
-st.logo('image/logo.png', size = 'Large', icon_image = 'image/logo.png')
+st.sidebar.image("image/logo.png", width=150) 
 
 # 네비게이션 바 스타일 설정 (원하는 대로 수정 가능)
 styles = {
@@ -82,7 +82,7 @@ styles = {
 
 # 네비게이션 바 옵션 설정 (메뉴와 사이드바를 활성화)
 options = {
-    "show_menu": True,
+    "show_menu": False,
     "show_sidebar": True,
     "use_padding": True,
 }
