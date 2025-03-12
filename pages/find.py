@@ -175,10 +175,10 @@ def filter_page():
                     st.image(row["image_url"], width=100)
                 with col2:
                     st.markdown(f"<p style='margin: 0; font-size: 16px;'>{row['title']}</p>", unsafe_allow_html=True)
-                    st.markdown(f"<p style='margin: 2px 0; font-size: 14px;'>💰 가격: {row['sale_price']}원</p>", unsafe_allow_html=True)
+                    st.markdown(f"<p style='margin: 2px 0; font-size: 14px;'>가격: {row['sale_price']}원</p>", unsafe_allow_html=True)
 
                     # 팝업 창 열기 버튼
-                    if st.button(f"📝 자세한 정보 보기", key=f"modal_{row['title']}"):
+                    if st.button(f"자세한 정보 보기", key=f"modal_{row['title']}"):
                         st.session_state["modal_data"] = row  # 선택된 데이터 저장
                         modal.open()  # 모달 열기
                 # 구분선 추가
