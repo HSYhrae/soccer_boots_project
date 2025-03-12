@@ -60,6 +60,7 @@ st.logo('image/logo.png', size = 'Large', icon_image = 'image/logo.png')
 styles = {
     "nav": {
         "background-color": "#d3d3d3",
+        "padding": "5px",  # 내부 여백
     },
     "div": {
         "max-width": "20rem",
