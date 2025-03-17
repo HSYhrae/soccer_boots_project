@@ -135,6 +135,6 @@ def main():
             else:
                 st.write("선수를 찾을 수 없습니다.")
 
-def show_player():
+def show_matching():
     st.query_params["pages"] = "matching"
     main()
