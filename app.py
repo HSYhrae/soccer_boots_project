@@ -23,22 +23,46 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ✅ 폰트 적용 (Safari 호환성을 위해 `@import` 대신 `<link>` 방식)
+# 폰트 적용 (네비게이션 바 제외)
 st.markdown("""
-    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400" rel="stylesheet">
-    <style>
-        body, .stButton button, .stTextInput input, .stSelectbox, .stMultiselect, h1, h2, h3, h4, h5, h6, p, div, span, li, a {
-            font-family: 'Nanum Gothic Coding', monospace !important;
-        }
-    </style>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400" rel="stylesheet">
+<style>
+/* 모든 요소에 Nanum Gothic Coding 폰트 적용 (네비게이션 바 제외) /
+body, .stButton button, .stTextInput input, .stSelectbox, .stMultiselect,
+h1, h2, h3, h4, h5, h6, p, div:not([data-v-96be9aef]), span:not([data-v-96be9aef]), 
+li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
+    font-family: 'Nanum Gothic Coding', monospace !important;
+}
+
+/* 이미지 컨테이너 스타일 추가 */
+[data-testid="stImageContainer"] {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+/* 전체 화면 프레임 스타일 */
+[data-testid="stFullScreenFrame"] {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+/ 버튼 스타일 */
+button[data-testid="stBaseButton-headerNoPadding"] {
+    background-color: red !important;
+    font-family: 'Nanum Gothic Coding', monospace !important;
+}
+</style>
 """, unsafe_allow_html=True)
 
-# ✅ 로고 표시 (`st.logo()` → `st.sidebar.image()`로 변경)
-st.sidebar.image("image/logo.png", use_column_width=True)
+# 웹페이지에 로고 삽입입
+st.logo('image/logo.png', size = 'Large', icon_image = 'image/logo.png')
 
-# ✅ 네비게이션 바 설정
+# 네비게이션 바에 표시할 페이지 이름
 pages = ["Home", "Boots", "Player","Dashboard"]
 
+
+# 네비게이션 바 스타일 설정 (원하는 대로 수정 가능)
 styles = {
     "nav": {
         "background-color": "#d3d3d3",
@@ -62,21 +86,29 @@ styles = {
     },
 }
 
+# 네비게이션 바 옵션 설정 (메뉴와 사이드바를 활성화)
 options = {
     "show_menu": False,
     "show_sidebar": True,
     "use_padding": True,
 }
 
-page = st_navbar(pages, styles=styles, options=options)
+# 네비게이션 바 생성: 선택한 페이지 이름이 반환됩니다.
+page = st_navbar(
+    pages,
+    styles=styles,
+    options=options,
+) # 선택한 페이지 이름을 출력 (디버깅 용도)
 
-# ✅ 페이지 라우팅 (매핑 오류 수정)
+# 각 페이지에 해당하는 함수 매핑
 functions = {
     "Home": pg.show_home,
     "Boots": pg.show_Find,
     "Player": pg.show_player,
-    "Dashboard": pg.show_dashboard
+    "Dashboard":pg.show_dashboard
 }
 
-if page in functions:
-    functions[page]()
+# 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
+go_to = functions.get(page)
+if go_to:
+    go_to()
