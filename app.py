@@ -4,6 +4,20 @@ st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="
 
 st.query_params["pages"] = "홈"
 
+st.markdown("""
+<style>
+/ Streamlit 특정 클래스에 폰트 적용 /
+.st-emotion-cache-bm2z3a {
+    min-height: 100vh !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: flex !important;
+    flex-direction: column !important;
+    pointer-events: auto !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # 폰트 적용 (네비게이션 바 제외)
 st.markdown("""
 <style>
@@ -14,16 +28,6 @@ body, .stButton button, .stTextInput input, .stSelectbox, .stMultiselect,
 h1, h2, h3, h4, h5, h6, p, div:not([data-v-96be9aef]), span:not([data-v-96be9aef]), 
 li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
     font-family: 'Nanum Gothic Coding', monospace !important;
-}
-
-/ Streamlit 특정 클래스에 폰트 적용 /
-.st-emotion-cache-bm2z3a {
-    min-height: 100vh !important;
-    overflow: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    display: flex !important;
-    flex-direction: column !important;
-    pointer-events: auto !important;
 }
 
 /* 이미지 컨테이너 스타일 추가 */
