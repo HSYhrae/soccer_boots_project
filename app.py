@@ -86,7 +86,7 @@ st.markdown("""
 st.logo('image/logo.png', size = 'Large', icon_image = 'image/logo.png')
 
 # 네비게이션 바에 표시할 페이지 이름
-pages = ["Home", "Boots", "Player","Dashboard"]
+pages = ["Home", "Boots", "Player","Matching"]
 
 
 # 네비게이션 바 스타일 설정 (원하는 대로 수정 가능)
@@ -130,9 +130,9 @@ page = st_navbar(
 # 각 페이지에 해당하는 함수 매핑
 functions = {
     "Home": pg.show_home,
-    "Boots": pg.show_Find,
+    "Boots": pg.show_boots,
     "Player": pg.show_player,
-    "Dashboard":pg.show_dashboard
+    "Matching":pg.show_matching
 }
 
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
