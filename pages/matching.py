@@ -66,27 +66,35 @@ def main():
     similar_players = st.session_state["similar_players"]
     if similar_players is not None:
         st.subheader("Player List")
+
         for row_idx, row in similar_players.iterrows():
-            cols = st.columns(2)
+            cols = st.columns([1, 1])  # 동일한 크기의 두 컬럼
 
-            # 왼쪽 컬럼: 선수 이미지와 이름 출력
+            # 왼쪽 컬럼: 선수 정보 (이미지 + 이름)
             with cols[0]:
-                if pd.notnull(row["img"]):  # 이미지가 존재할 때만 표시
-                    st.image(row["img"], width=100)
-                st.write(row["name_ko"])
+                st.markdown(f"""
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: auto; margin: 5px;">
+                    <img src='{row["img"]}' style='height: 140px; object-fit: contain; border-radius: 10px;'>
+                    <div style='font-weight: bold; font-size: 14px; margin-top: 5px;'>{row["name_ko"]}</div>
+                </div>
+                """, unsafe_allow_html=True)
 
-            # 오른쪽 컬럼: boots_image와 boots 정보 출력
+            # 오른쪽 컬럼: 축구화 정보 (이미지 + 이름)
             with cols[1]:
-                if pd.notnull(row["boots_img"]):  # 축구화 이미지가 존재할 때만 표시
-                    st.image(row["boots_img"], width=200)
-                    st.write(f"{row['boots_ko']}")
+                st.markdown(f"""
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: auto; margin: 5px;">
+                    <img src='{row["boots_img"]}' style='height: 140px; object-fit: contain; border-radius: 10px;'>
+                    <div style='font-weight: bold; font-size: 14px; margin-top: 5px;'>{row["boots_ko"]}</div>
+                </div>
+                """, unsafe_allow_html=True)
 
-            # '정보 보기' 버튼 클릭 시 모달 팝업 열기
+            # '정보 보기' 버튼
             if st.button("정보 보기", key=f"btn_{row['name_ko']}_{row_idx}"):
                 st.session_state["modal_open"] = True
                 st.session_state["selected_player"] = row["name_ko"]
                 modal.open()
-            st.markdown("---")
+
+            st.markdown("---") 
 
     if modal.is_open():
         with modal.container():
@@ -127,15 +135,6 @@ def main():
             else:
                 st.write("선수를 찾을 수 없습니다.")
 
-def show_matching():
+def show_player():
     st.query_params["pages"] = "matching"
     main()
-
-
-
-
-
-
-
-
-
