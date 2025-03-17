@@ -10,25 +10,32 @@ st.query_params["pages"] = "홈"
 # ✅ 스크롤 문제 해결 (iPhone Safari 대응)
 st.markdown("""
     <style>
-    /* 전체 화면 높이를 채우고 스크롤 가능하도록 설정 /
-    .st-emotion-cache-bm2z3a {
-        min-height: 100vh !important; / 전체 화면 높이 유지 /
+    /* AWS에서도 적용되도록 우선순위 높이기 /
+    html, body, .st-emotion-cache-bm2z3a {
+        min-height: 100vh !important;
         height: -webkit-fill-available !important;
         overflow: auto !important;
         -webkit-overflow-scrolling: touch !important;
         display: flex !important;
         flex-direction: column !important;
-        pointer-events: auto !important; / 화면 어디든 터치 가능 /
+        pointer-events: auto !important;
     }
 
-    / Streamlit 메인 컨테이너 스크롤 설정 /
-    [data-testid="stAppViewContainer"] {
+    / Streamlit 컨테이너 스크롤 허용 /
+    [data-testid="stAppViewContainer"], .stApp {
         height: 100% !important;
         overflow-y: auto !important;
-        touch-action: pan-y; / 화면 어디서든 스크롤 가능 /
+        touch-action: pan-y !important; / AWS에서 터치 스크롤 강제 적용 /
     }
 
-    / 사이드바 스크롤 허용 */
+    / AWS 환경에서도 iFrame 스크롤 허용 /
+    iframe {
+        height: 100% !important;
+        overflow-y: auto !important;
+        pointer-events: auto !important;
+    }
+
+    / 사이드바 스크롤 가능하도록 설정 */
     [data-testid="stSidebarContent"] {
         height: 100% !important;
         overflow-y: auto !important;
@@ -39,15 +46,6 @@ st.markdown("""
 # 폰트 적용 (네비게이션 바 제외)
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400');
-
-/* 모든 요소에 Nanum Gothic Coding 폰트 적용 (네비게이션 바 제외) /
-body, .stButton button, .stTextInput input, .stSelectbox, .stMultiselect,
-h1, h2, h3, h4, h5, h6, p, div:not([data-v-96be9aef]), span:not([data-v-96be9aef]), 
-li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
-    font-family: 'Nanum Gothic Coding', monospace !important;
-}
-
 /* 이미지 컨테이너 스타일 추가 */
 [data-testid="stImageContainer"] {
     display: flex !important;
@@ -60,16 +58,9 @@ li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
     justify-content: center !important;
     width: 100% !important;
 }
-
-/ 버튼 스타일 */
-button[data-testid="stBaseButton-headerNoPadding"] {
-    background-color: red !important;
-    font-family: 'Nanum Gothic Coding', monospace !important;
-}
-</style>
 """, unsafe_allow_html=True)
 
-# 웹페이지에 로고 삽입입
+# 웹페이지에 로고 삽입
 st.logo('image/logo.png', size = 'Large', icon_image = 'image/logo.png')
 
 # 네비게이션 바에 표시할 페이지 이름
