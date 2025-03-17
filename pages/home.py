@@ -31,7 +31,7 @@ def show_home():
     
     # 첫 번째 컬럼에 축구화 추천 버튼
     with col1:
-        if st.button("⚽ 축구화 추천 ", use_container_width=True):
+        if st.button("⚽ Boots", use_container_width=True):
             st.session_state.show_text1 = not st.session_state.show_text1
         if st.session_state.show_text1:
             st.markdown("""
@@ -41,9 +41,9 @@ def show_home():
                 </div>
             """, unsafe_allow_html=True)
 
-    # 두 번째 컬럼에 선수 추천 버튼
+    # 두 번째 컬럼에 선수 찾기 버튼
     with col2:
-        if st.button("👤 선수 찾기", use_container_width=True):
+        if st.button("👤 Player", use_container_width=True):
             st.session_state.show_text2 = not st.session_state.show_text2
         if st.session_state.show_text2:
             st.markdown("""
@@ -53,9 +53,9 @@ def show_home():
                 </div>
             """, unsafe_allow_html=True)
 
-    # 세 번째 컬럼에 대시보드 버튼
+    # 세 번째 컬럼에 매칭 버튼
     with col3:
-        if st.button("🏆 대시보드", use_container_width=True):
+        if st.button("🏆 Matching", use_container_width=True):
             st.session_state.show_text3 = not st.session_state.show_text3
         if st.session_state.show_text3:
             st.markdown("""
