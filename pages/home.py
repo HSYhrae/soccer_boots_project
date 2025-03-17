@@ -48,7 +48,7 @@ def show_home():
         if st.session_state.show_text2:
             st.markdown("""
                 <div style='background-color: #e6e6e6; padding: 10px; border-radius: 5px;'>
-                    <p>자신의 키와 포지션을 선택하여 유사한 선수를 확인할 수 있습니다</p>
+                    <p>원하는 선수를 검색하여 해당 선수의 정보를 확인해보세요!</p>                
                     <p>상단 탭에서 "Player"를 눌러주세요</p>
                 </div>
             """, unsafe_allow_html=True)
@@ -60,7 +60,7 @@ def show_home():
         if st.session_state.show_text3:
             st.markdown("""
                 <div style='background-color: #e6e6e6; padding: 10px; border-radius: 5px;'>
-                    <p>원하는 선수를 검색하여 해당 선수의 정보를 확인해보세요!</p>
-                    <p>상단 탭에서 "Search"를 눌러주세요</p>
+                    <p>자신의 키와 포지션을 선택하여 유사한 선수를 확인할 수 있습니다</p>
+                    <p>상단 탭에서 "Matching"를 눌러주세요</p>
                 </div>
             """, unsafe_allow_html=True)

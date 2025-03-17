@@ -214,8 +214,6 @@ def filter_page():
                     st.write(foot_display)
                     st.write(url_display)
 
-                    if st.button("닫기"):
-                        modal.close()
     else:
         st.write("❌ 해당 조건에 맞는 축구화가 없습니다.")
     
@@ -240,7 +238,7 @@ def filter_page():
                 st.session_state["page_number"] += 1
 
 
-def show_Find():
+def show_boots():
     st.query_params["pages"] = "축구화"
 
     # ✅ Session State 안전하게 초기화
