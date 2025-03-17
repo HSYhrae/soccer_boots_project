@@ -1,85 +1,140 @@
 import streamlit as st
 import pandas as pd
+import requests
+from sklearn.neighbors import NearestNeighbors
+from sklearn.preprocessing import StandardScaler
+from streamlit_modal import Modal
+import numpy as np
+
+@st.cache_data
+def load_data():
+    return pd.read_csv("./data/player.csv")
 
 def main():
-    # 데이터 로드 함수
-    @st.cache_data
-    def load_data():
-        df = pd.read_csv("./data/player.csv")  # 데이터 불러오기
+    st.title("나와 비슷한 선수 찾기")
+    st.write("👈 사이드바에 자신의 포지션과 키를 입력하세요.")
 
-        # 필요한 컬럼 선택 및 컬럼명 변경 (color, img 컬럼 제외)
-        selected_columns = {
-            "name_ko": "이름",
-            "country_ko": "국가",
-            "position_ko": "포지션",
-            "team_name": "팀",
-            "age": "나이",
-            "height": "키",
-            "img": "이미지",
-            "img_src": "배경 이미지",
-            "boots_ko": "축구화",
-            "boots_img": "축구화 이미지"
-        }
+    if "similar_players" not in st.session_state:
+        st.session_state["similar_players"] = None
+    if "modal_open" not in st.session_state:
+        st.session_state["modal_open"] = False
+    if "selected_player" not in st.session_state:
+        st.session_state["selected_player"] = None
 
-        df = df[list(selected_columns.keys())]  # 필요한 컬럼만 선택
-        df = df.rename(columns=selected_columns)  # 컬럼명 변경
-        return df
-
-    # 유효한 이미지 URL 가져오기
-    def get_valid_image(url):
-        if pd.isna(url) or url == "":
-            return "https://via.placeholder.com/150"  # 기본 이미지
-        return url
-
-    # Streamlit UI
-    st.title("선수 목록")
-    st.write("사이드바에서 선수를 검색하여 상세 목록을 확인하세요!")
-
-    # 데이터 로드
+    modal = Modal(key="player_modal", title="축구선수 정보 보기")
     df = load_data()
 
-    # 사이드바에서 선수 이름 선택
-    selected_name = st.sidebar.selectbox("선수 이름을 선택하세요", [""] + df["이름"].unique().tolist())
+    positions = df['position_ko'].dropna().unique().tolist()
+    selected_position = st.sidebar.selectbox("포지션을 골라주세요", positions)
+    selected_height = st.sidebar.number_input("키를 입력하세요 (cm)",
+                                              min_value=140.0,
+                                              max_value=220.0,
+                                              value=180.0,
+                                              step=0.1)
 
-    # 검색 버튼 추가
-    search_button = st.sidebar.button("검색하기")
+    if st.sidebar.button("검색하기"):
+        features = pd.concat([
+            pd.get_dummies(df['position_ko'], prefix='pos'),
+            df[['height']]
+        ], axis=1)
 
-    # 🎯 **선수가 선택되지 않은 경우 → 데이터프레임 표시**
-    if not search_button:
-        df_display = df.drop(columns=["이미지", "배경 이미지", "축구화 이미지"])  # 이미지 컬럼 제거
-        st.dataframe(df_display)
-    elif selected_name:  # 🎯 **검색 버튼이 눌리면 → 선수 정보 표시**
-        player_info = df.loc[df["이름"] == selected_name].iloc[0].to_dict()
+        scaler = StandardScaler()
+        features_scaled = scaler.fit_transform(features)
 
-        img_1 = get_valid_image(player_info.get("배경 이미지"))
-        img_2 = get_valid_image(player_info.get("이미지"))  # 선수 이미지
-        boots_img = get_valid_image(player_info.get("축구화 이미지"))  # 축구화 이미지
+        knn = NearestNeighbors(n_neighbors=10)
+        knn.fit(features_scaled)
 
-        # HTML로 이미지 순서대로 표시
-        html_content = f"""
-        <div style="padding: 20px; border-radius: 10px; text-align: center;">
-            <!-- 선수 이미지 -->
-            <div style="position: relative; width: 200px; height: 200px; margin: auto;">
-                <img src="{img_1}" style="width: 120%; opacity: 0.5; border-radius: 10px;">
-                <img src="{img_2}" style="position: absolute; top: 75px; left: 50px; width: 60%;">
-            </div>
-            <div>
-            <img src="{boots_img}" style="width: 200px; margin-top: 10px;">
-            </div>
-            <!-- 선수 정보 -->
-            <p><strong>이름:</strong> {player_info.get('이름')}</p>
-            <p><strong>포지션:</strong> {player_info.get('포지션')}</p>
-            <p><strong>축구화:</strong> {player_info.get('축구화')}</p>
-            <p><strong>팀:</strong> {player_info.get('팀')}</p>
-            <p><strong>국가:</strong> {player_info.get('국가')}</p>
-            <p><strong>나이:</strong> {player_info.get('나이')}</p>
-            <p><strong>키:</strong> {player_info.get('키')} cm</p>
-            
-            
-        </div>
-        """
-        st.markdown(html_content, unsafe_allow_html=True)
+        query_df = pd.DataFrame({
+            "position": [selected_position],
+            "height": [selected_height]
+        })
+        query_features = pd.concat([
+            pd.get_dummies(query_df['position'], prefix='pos'),
+            query_df[['height']]
+        ], axis=1)
+        query_features = query_features.reindex(columns=features.columns, fill_value=0)
+        query_scaled = scaler.transform(query_features)
+
+        distances, indices = knn.kneighbors(query_scaled)
+        similar_players = df.iloc[indices[0]].copy()
+        similar_players["distance"] = distances[0]
+
+        st.session_state["similar_players"] = similar_players
+        st.session_state["modal_open"] = False
+        st.session_state["selected_player"] = None
+
+    similar_players = st.session_state["similar_players"]
+    if similar_players is not None:
+        st.subheader("Player List")
+
+        for row_idx, row in similar_players.iterrows():
+            cols = st.columns([1, 1])  # 동일한 크기의 두 컬럼
+
+            # 왼쪽 컬럼: 선수 정보 (이미지 + 이름)
+            with cols[0]:
+                st.markdown(f"""
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: auto; margin: 5px;">
+                    <img src='{row["img"]}' style='height: 140px; object-fit: contain; border-radius: 10px;'>
+                    <div style='font-weight: bold; font-size: 14px; margin-top: 5px;'>{row["name_ko"]}</div>
+                </div>
+                """, unsafe_allow_html=True)
+
+            # 오른쪽 컬럼: 축구화 정보 (이미지 + 이름)
+            with cols[1]:
+                st.markdown(f"""
+                <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: auto; margin: 5px;">
+                    <img src='{row["boots_img"]}' style='height: 140px; object-fit: contain; border-radius: 10px;'>
+                    <div style='font-weight: bold; font-size: 14px; margin-top: 5px;'>{row["boots_ko"]}</div>
+                </div>
+                """, unsafe_allow_html=True)
+
+            # '정보 보기' 버튼
+            if st.button("정보 보기", key=f"btn_{row['name_ko']}_{row_idx}"):
+                st.session_state["modal_open"] = True
+                st.session_state["selected_player"] = row["name_ko"]
+                modal.open()
+
+            st.markdown("---") 
+
+    if modal.is_open():
+        with modal.container():
+            selected_name = st.session_state["selected_player"]
+            if selected_name:
+                player_info = df.loc[df["name_ko"] == selected_name].iloc[0].to_dict()
+
+                img_1 = player_info.get("img_src")
+                img_2 = player_info.get("img")  # 겹칠 이미지
+                boots_img = player_info.get("boots_img")  # 축구화 이미지
+
+                # HTML로 이미지 겹쳐서 표시
+                html_content = f"""
+                <div style="padding: 20px; border-radius: 10px;">
+                    <div style="position: relative; width: 200px; height: 200px; margin: auto;">
+                """
+                if img_1 and pd.notnull(img_1):  # 배경 이미지가 존재할 때만 표시
+                    html_content += f'<img src="{img_1}" style="position: absolute; top: 0; left: 0; width: 120%; opacity: 0.5; border-radius: 10px;">'
+
+                if img_2 and pd.notnull(img_2):  # 선수 이미지가 존재할 때만 표시
+                    html_content += f'<img src="{img_2}" style="position: absolute; top: 75px; left: 50px; width: 60%;">'
+
+                html_content += """
+                    </div>
+                    <p><strong>이름:</strong> {}</p>
+                    <p><strong>팀:</strong> {}</p>
+                    <p><strong>국가:</strong> {}</p>
+                    <p><strong>포지션:</strong> {}</p>
+                    <p><strong>키:</strong> {} cm</p>
+                """.format(player_info.get('name_ko'), player_info.get('team_name'),
+                           player_info.get('country_ko'), player_info.get('position_ko'),
+                           player_info.get('height'))
+
+
+                html_content += "</div>"
+
+                st.markdown(html_content, unsafe_allow_html=True)
+            else:
+                st.write("선수를 찾을 수 없습니다.")
 
 def show_player():
-    st.query_params["pages"] = "축구선수"
+    st.query_params["pages"] = "player"
     main()
