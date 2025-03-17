@@ -16,8 +16,8 @@ st.markdown("""
         -webkit-overflow-scrolling: touch !important;
     }
     
-    [data-testid="stSidebar"] {
-        overflow: auto !important;
+    [data-testid="stSidebarContent"] {
+        overflow-y: auto !important;
         height: 100% !important;
     }
     </style>
