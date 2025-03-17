@@ -25,8 +25,9 @@ st.markdown("""
 
 # 폰트 적용 (네비게이션 바 제외)
 st.markdown("""
-<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400" rel="stylesheet">
 <style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400');
+
 /* 모든 요소에 Nanum Gothic Coding 폰트 적용 (네비게이션 바 제외) /
 body, .stButton button, .stTextInput input, .stSelectbox, .stMultiselect,
 h1, h2, h3, h4, h5, h6, p, div:not([data-v-96be9aef]), span:not([data-v-96be9aef]), 
