@@ -24,7 +24,6 @@ li:not([data-v-96be9aef]), a:not([data-v-96be9aef]) {
     display: flex !important;
     flex-direction: column !important;
     pointer-events: auto !important;
-    font-family: 'Nanum Gothic Coding', monospace !important;
 }
 
 /* 이미지 컨테이너 스타일 추가 */
