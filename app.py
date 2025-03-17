@@ -10,15 +10,28 @@ st.query_params["pages"] = "홈"
 # ✅ 스크롤 문제 해결 (iPhone Safari 대응)
 st.markdown("""
     <style>
-    html, body, [data-testid="stAppViewContainer"], .st-emotion-cache-bm2z3a {
-        height: 100% !important;
+    /* 전체 화면 높이를 채우고 스크롤 가능하도록 설정 /
+    .st-emotion-cache-bm2z3a {
+        min-height: 100vh !important; / 전체 화면 높이 유지 /
+        height: -webkit-fill-available !important;
         overflow: auto !important;
         -webkit-overflow-scrolling: touch !important;
+        display: flex !important;
+        flex-direction: column !important;
+        pointer-events: auto !important; / 화면 어디든 터치 가능 /
     }
-    
-    [data-testid="stSidebarContent"] {
-        overflow-y: auto !important;
+
+    / Streamlit 메인 컨테이너 스크롤 설정 /
+    [data-testid="stAppViewContainer"] {
         height: 100% !important;
+        overflow-y: auto !important;
+        touch-action: pan-y; / 화면 어디서든 스크롤 가능 /
+    }
+
+    / 사이드바 스크롤 허용 */
+    [data-testid="stSidebarContent"] {
+        height: 100% !important;
+        overflow-y: auto !important;
     }
     </style>
 """, unsafe_allow_html=True)
