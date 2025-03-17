@@ -5,7 +5,7 @@ import pages as pg
 
 st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
 
-st.query_params["pages"] = "홈"
+st.query_params["pages"] = "home"
 
 # ✅ 스크롤 문제 해결 (iPhone Safari 대응)
 st.markdown("""
