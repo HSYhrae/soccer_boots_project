@@ -9,41 +9,63 @@ st.query_params["pages"] = "홈"
 
 # ✅ 스크롤 문제 해결 (iPhone Safari 대응)
 st.markdown("""
-    <style>
-    /* AWS에서도 적용되도록 우선순위 높이기 /
-    html, body, .st-emotion-cache-bm2z3a {
-        min-height: 100vh !important;
-        height: -webkit-fill-available !important;
-        overflow: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        display: flex !important;
-        flex-direction: column !important;
-        pointer-events: auto !important;
-    }
+<style>
+/* ✅ 전체 화면 컨테이너 스크롤 허용 /
+html, body, [data-testid="stAppViewContainer"], .st-emotion-cache-bm2z3a {
+    min-height: 100vh !important;
+    height: 100% !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    pointer-events: auto !important;
+}
 
-    / Streamlit 컨테이너 스크롤 허용 /
-    [data-testid="stAppViewContainer"], .stApp {
-        height: 100% !important;
-        overflow-y: auto !important;
-        touch-action: pan-y !important; / AWS에서 터치 스크롤 강제 적용 /
-    }
+/ ✅ Streamlit 기본 레이아웃 조정 /
+[data-testid="stMainBlockContainer"] {
+    display: block !important;
+    overflow: auto !important;
+    height: auto !important;
+    min-height: 100vh !important;
+}
 
-    / AWS 환경에서도 iFrame 스크롤 허용 /
-    iframe {
-        height: 100% !important;
-        overflow-y: auto !important;
-        pointer-events: auto !important;
-    }
+/ ✅ 사이드바 스크롤 활성화 /
+[data-testid="stSidebarContent"] {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+}
 
-    / 사이드바 스크롤 가능하도록 설정 */
-    [data-testid="stSidebarContent"] {
-        height: 100% !important;
-        overflow-y: auto !important;
-    }
-    </style>
+/ ✅ iFrame(네비게이션 바) 스크롤 허용 /
+iframe {
+    min-height: auto !important;
+    height: fit-content !important;
+    overflow-y: auto !important;
+    pointer-events: auto !important;
+}
+
+/ ✅ Streamlit 네비게이션 바 고정 및 스크롤 문제 해결 /
+iframe[title="streamlit_navigation_bar.st_navbar"] {
+    height: auto !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+    top: 0px !important;
+    left: 0px !important;
+    width: 100% !important;
+}
+
+/ ✅ Streamlit 기본 UI 요소 터치 가능하도록 수정 */
+div[data-testid="stAppViewContainer"] {
+    pointer-events: auto !important;
+}
+div[data-testid="stMainBlockContainer"] {
+    pointer-events: auto !important;
+}
+section[data-testid="stSidebar"] {
+    pointer-events: auto !important;
+}
+</style>
 """, unsafe_allow_html=True)
 
-# 폰트 적용 (네비게이션 바 제외)
+# 
 st.markdown("""
 <style>
 /* 이미지 컨테이너 스타일 추가 */

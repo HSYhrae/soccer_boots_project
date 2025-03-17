@@ -37,7 +37,7 @@ def show_home():
             st.markdown("""
                 <div style='background-color: #e6e6e6; padding: 10px; border-radius: 5px;'>
                     <p>발볼과 길이 등 원하는 조건을 선택하여 상품 후보를 확인할 수 있습니다</p>
-                    <p>상단 탭에서 축구화를 눌러주세요</p>
+                    <p>상단 탭에서 "Boots"를 눌러주세요</p>
                 </div>
             """, unsafe_allow_html=True)
 
@@ -49,7 +49,7 @@ def show_home():
             st.markdown("""
                 <div style='background-color: #e6e6e6; padding: 10px; border-radius: 5px;'>
                     <p>자신의 키와 포지션을 선택하여 유사한 선수를 확인할 수 있습니다</p>
-                    <p>상단 탭에서 축구선수를 눌러주세요</p>
+                    <p>상단 탭에서 "Player"를 눌러주세요</p>
                 </div>
             """, unsafe_allow_html=True)
 
@@ -60,7 +60,7 @@ def show_home():
         if st.session_state.show_text3:
             st.markdown("""
                 <div style='background-color: #e6e6e6; padding: 10px; border-radius: 5px;'>
-                    <p>각 나라의 브랜드 선호도와 시리즈별 선호도를 확인할 수 있습니다</p>
-                    <p>상단 탭에서 대시보드를 눌러주세요</p>
+                    <p>원하는 선수를 검색하여 해당 선수의 정보를 확인해보세요!</p>
+                    <p>상단 탭에서 "Search"를 눌러주세요</p>
                 </div>
             """, unsafe_allow_html=True)
