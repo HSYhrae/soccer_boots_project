@@ -7,8 +7,8 @@ st.query_params["pages"] = "홈"
 st.markdown("""
 <style>
 / Streamlit 특정 클래스에 폰트 적용 /
-.st-emotion-cache-bm2z3a {
-    min-height: 100vh !important;
+html, body, [data-testid="stAppViewContainer"], .st-emotion-cache-bm2z3a {
+    min-height: 100% !important;
     overflow: auto !important;
     -webkit-overflow-scrolling: touch !important;
     display: flex !important;
