@@ -137,14 +137,55 @@ functions = {
 
 # 페이지 하단 고정
 st.markdown("""
-    ---
-    <div style="text-align: center; padding: 10px; background-color: black; color: white; border-radius: 10px;">
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+        
+        .footer:hover {
+            opacity: 1;
+        }
+        
+        .footer-hidden {
+            opacity: 0;
+        }
+    </style>
+    
+    <div class="footer" id="footer">
         <p><strong>오류제보 / 개선사항 / 궁금하신 점은 아래 방법으로 문의해주세요!</strong></p>
-        <a href="shinyeop1224@gmail.com"><img src="https://img.shields.io/badge/Mail-32CD32?style=flat-square&logo=Mail&logoColor=white&link=mailto:shinyeop1224@gmail.com"/></a>
-        <a href="https://soccerly.site"><img src="//i.namu.wiki/i/iRujXz4SRGLmu9cvmxirpM4liQnifMCESMLUQCdW3p6sSqL20r4wfSSK9NS_w4HYU4p3O3xrT5ns3CmE88jmQA.svg" />
-</a>
+        <a href="mailto:shinyeop1224@gmail.com">
+            <img src="https://img.shields.io/badge/Mail-32CD32?style=flat-square&logo=Mail&logoColor=white" />
+        </a>
+        <a href="https://soccerly.site">
+            <img src="//i.namu.wiki/i/iRujXz4SRGLmu9cvmxirpM4liQnifMCESMLUQCdW3p6sSqL20r4wfSSK9NS_w4HYU4p3O3xrT5ns3CmE88jmQA.svg" />
+        </a>
     </div>
-    """, unsafe_allow_html=True)
+
+    <script>
+        var prevScrollpos = window.pageYOffset;
+        window.onscroll = function() {
+            var currentScrollPos = window.pageYOffset;
+            var footer = document.getElementById("footer");
+            if (prevScrollpos > currentScrollPos) {
+                footer.classList.remove("footer-hidden");
+            } else {
+                footer.classList.add("footer-hidden");
+            }
+            prevScrollpos = currentScrollPos;
+        }
+    </script>
+""", unsafe_allow_html=True)
+
 
 
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
