@@ -167,7 +167,7 @@ st.markdown(
     </script>
 
     <div class="footer">
-        문의: <a href="shinyeop1224@gmail.com">shinyeop1224@gmail.com</a> |
+        문의: <a href="mailto:shinyeop1224@gmail.com">shinyeop1224@gmail.com</a> |
         <a href="https://forms.gle/Chx2ECTp5F1qvQzS9" target="_blank">Google Forms</a>
     </div>
     """,
