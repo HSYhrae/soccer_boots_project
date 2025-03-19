@@ -153,7 +153,7 @@ st.markdown(
         }
     </style>
     <div class="footer">
-        📩 문의: <a href="mailto:shinyeop1224@gmail.com">shinyeop1224@gmail.com</a> |
+        📩 문의: <a href="mailto:shinyeop1224@gmail.com">shinyeop1224@gmail.com</a><br>
         📋 피드백 제출: <a href="https://forms.gle/Chx2ECTp5F1qvQzS9" target="_blank">Google Forms 바로가기</a>
     </div>
     """,
