@@ -135,8 +135,8 @@ functions = {
     "Matching":pg.show_matching
 }
 
-footer = st.empty()
-footer.markdown("---\n📩 문의: [your_email@example.com](mailto:shinyeop1224@gmail.com)")
+
+st.markdown("---\n📩 문의: [your_email@example.com](mailto:shinyeop1224@gmail.com)")
 
 
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
