@@ -12,7 +12,7 @@ def load_data():
 
 def main():
     st.title("나와 비슷한 선수 찾기")
-    st.write("👈 사이드바에 자신의 포지션과 키를 입력하세요.")
+    st.write("👈 >를 눌러 사이드바에 자신의 포지션과 키를 입력하세요.")
 
     if "similar_players" not in st.session_state:
         st.session_state["similar_players"] = None
