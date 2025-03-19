@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 
+
 # 검색 기록 파일 경로
 SEARCH_COUNT_FILE = "./data/search_counts.csv"
 
@@ -96,13 +97,16 @@ def main():
         """
         st.markdown(html_content, unsafe_allow_html=True)
 
-    # 🔥 **실시간 검색 순위 (검색량 숨김)**
+    # 🔥 **실시간 검색 순위 표시 (검색 횟수 대신 순위만 표시)**
     st.sidebar.subheader("🔥 실시간 검색 순위")
     search_df = load_search_counts()
 
     if not search_df.empty:
         search_df = search_df.sort_values(by="검색 횟수", ascending=False).head(10)
-        st.sidebar.write("\n".join(f"⭐ {name}" for name in search_df["이름"]))
+        search_df["순위"] = range(1, len(search_df) + 1)  # 순위 컬럼 추가
+        search_df = search_df[["순위", "이름"]]  # 검색 횟수 제거
+        
+        st.sidebar.dataframe(search_df, hide_index=True)  # 인덱스 숨기기
     else:
         st.sidebar.write("아직 검색된 선수가 없습니다.")
 
