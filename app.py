@@ -136,43 +136,15 @@ functions = {
 }
 
 # 페이지 하단 고정
-st.markdown(
-    """
-    <style>
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(248, 249, 250, 1); /* 기본 색 */
-            text-align: center;
-            padding: 10px;
-            font-size: 14px;
-            color: #333; /* 글자 색 */
-            border-top: 1px solid #ddd;
-            transition: opacity 0.5s ease-in-out; /* 투명도 전환 효과 */
-            opacity: 1; /* 기본 상태: 보임 */
-        }
-    </style>
-
-    <script>
-        window.addEventListener("scroll", function() {
-            var footer = document.querySelector(".footer");
-            if (window.scrollY > 50) {  // 스크롤 50px 이상 내려가면
-                footer.style.opacity = "0";  // 완전 투명
-            } else {
-                footer.style.opacity = "1";  // 다시 보이게
-            }
-        });
-    </script>
-
-    <div class="footer">
-        📩 문의: <a href="mailto:shinyeop1224@gmail.com">shinyeop1224@gmail.com</a><br>
-        📋 피드백 제출: <a href="https://forms.gle/Chx2ECTp5F1qvQzS9" target="_blank">Google Forms 바로가기</a>
+st.markdown("""
+    ---
+    <div style="text-align: center; padding: 10px; background-color: black; color: white; border-radius: 10px;">
+        <p><strong>오류제보 / 개선사항 / 궁금하신 점은 아래 방법으로 문의해주세요!</strong></p>
+        <a href="shinyeop1224@gmail.com"><img src="https://img.shields.io/badge/Mail-32CD32?style=flat-square&logo=Mail&logoColor=white&link=mailto:shinyeop1224@gmail.com"/></a>
+        <a href="https://soccerly.site"><img src="//i.namu.wiki/i/iRujXz4SRGLmu9cvmxirpM4liQnifMCESMLUQCdW3p6sSqL20r4wfSSK9NS_w4HYU4p3O3xrT5ns3CmE88jmQA.svg" />
+</a>
     </div>
-    """,
-    unsafe_allow_html=True
-)
+    """, unsafe_allow_html=True)
 
 
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
