@@ -144,14 +144,27 @@ st.markdown(
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #f8f9fa;
+            background-color: rgba(248, 249, 250, 1); /* 기본 색 */
             text-align: center;
             padding: 10px;
             font-size: 14px;
             color: #333;
             border-top: 1px solid #ddd;
+            transition: background-color 0.5s ease-in-out; /* 부드러운 전환 효과 */
         }
     </style>
+
+    <script>
+        window.addEventListener("scroll", function() {
+            var footer = document.querySelector(".footer");
+            if (window.scrollY > 50) {  // 스크롤 50px 이상 내려가면
+                footer.style.backgroundColor = "rgba(248, 249, 250, 0)"; // 투명하게
+            } else {
+                footer.style.backgroundColor = "rgba(248, 249, 250, 1)"; // 원래 색상
+            }
+        });
+    </script>
+
     <div class="footer">
         📩 문의: <a href="mailto:shinyeop1224@gmail.com">shinyeop1224@gmail.com</a><br>
         📋 피드백 제출: <a href="https://forms.gle/Chx2ECTp5F1qvQzS9" target="_blank">Google Forms 바로가기</a>
@@ -159,32 +172,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-
-# 화면 하단 고정
-# st.markdown(
-#     """
-#     <style>
-#     .footer {
-#         position: fixed;
-#         bottom: 0;
-#         left: 0;
-#         width: 100%;
-#         background-color: #f8f9fa;
-#         text-align: center;
-#         padding: 10px;
-#         font-size: 14px;
-#         color: #333;
-#         box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-#     }
-#     </style>
-#     <div class="footer">
-#         📩 문의: <a href="mailto:shinyeop1224@gmail.com">shinyeop1224@gmail.com</a>
-#     </div>
-#     """,
-#     unsafe_allow_html=True
-# )
-
 
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
 go_to = functions.get(page)
