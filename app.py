@@ -136,16 +136,30 @@ functions = {
 }
 
 # 페이지 하단 고정
-st.markdown("---")  # 구분선 추가
 st.markdown(
     """
-    <div style="text-align: center; padding: 10px; font-size: 14px; color: #333;">
-        📩 문의: <a href="mailto:shinyeop1224@gmail.com">shinyeop1224@gmail.com</a><br><br>
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            color: #333;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+    <div class="footer">
+        📩 문의: <a href="mailto:shinyeop1224@gmail.com">shinyeop1224@gmail.com</a> |
         📋 피드백 제출: <a href="https://forms.gle/Chx2ECTp5F1qvQzS9" target="_blank">Google Forms 바로가기</a>
     </div>
     """,
     unsafe_allow_html=True
 )
+
 
 # 화면 하단 고정
 # st.markdown(
