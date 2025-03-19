@@ -148,9 +148,10 @@ st.markdown(
             text-align: center;
             padding: 10px;
             font-size: 14px;
-            color: #333;
+            color: #333; /* 글자 색 */
             border-top: 1px solid #ddd;
-            transition: background-color 0.5s ease-in-out; /* 부드러운 전환 효과 */
+            transition: opacity 0.5s ease-in-out; /* 투명도 전환 효과 */
+            opacity: 1; /* 기본 상태: 보임 */
         }
     </style>
 
@@ -158,9 +159,9 @@ st.markdown(
         window.addEventListener("scroll", function() {
             var footer = document.querySelector(".footer");
             if (window.scrollY > 50) {  // 스크롤 50px 이상 내려가면
-                footer.style.backgroundColor = "rgba(248, 249, 250, 0)"; // 투명하게
+                footer.style.opacity = "0";  // 완전 투명
             } else {
-                footer.style.backgroundColor = "rgba(248, 249, 250, 1)"; // 원래 색상
+                footer.style.opacity = "1";  // 다시 보이게
             }
         });
     </script>
@@ -172,6 +173,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
 go_to = functions.get(page)
