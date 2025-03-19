@@ -136,7 +136,28 @@ functions = {
 }
 
 
-st.markdown("---\n📩 문의: [your_email@example.com](mailto:shinyeop1224@gmail.com)")
+st.markdown(
+    """
+    <style>
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+        color: #333;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+    </style>
+    <div class="footer">
+        📩 문의: <a href="mailto:shinyeop1224@gmail.com">shinyeop1224@gmail.com</a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
