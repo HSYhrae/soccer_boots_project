@@ -167,13 +167,17 @@ st.markdown(
     </script>
 
     <div class="footer">
-        문의: <a href="mailto:shinyeop1224@gmail.com">shinyeop1224@gmail.com</a> |
+        문의: <a href="mailto:soccerly.site@gmail.com">soccerly.site@gmail.com</a> |
         <a href="https://forms.gle/Chx2ECTp5F1qvQzS9" target="_blank">Google Forms</a>
     </div>
     """,
     unsafe_allow_html=True
 )
 
+# robots.txt 설정 (구글 크롤링 허용)
+st.markdown("""
+    <meta name="robots" content="index, follow">
+""", unsafe_allow_html=True)
 
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
 go_to = functions.get(page)
