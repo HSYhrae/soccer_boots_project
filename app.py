@@ -3,6 +3,19 @@ import os
 from streamlit_navigation_bar import st_navbar
 import pages as pg  
 
+# HTML 메타 태그 설정
+st.markdown("""
+    <head>
+        <title>Soccerly - 축구 데이터 & 분석</title>
+        <meta name="description" content="축구화 추천 시스템 | 가격, 브랜드, 특징별 맞춤 필터링 제공" />
+        <meta name="keywords" content="축구화, 축구화 추천, 축구화 비교, Soccerly">
+        <meta property="og:title" content="Soccerly - 나에게 맞는 축구화 찾기" />
+        <meta property="og:description" content="가격, 브랜드, 특징별로 나에게 맞는 축구화를 찾아보세요!" />
+        <meta property="og:image" content="https://soccerly.site/static/logo.png" />
+        <meta property="og:url" content="https://soccerly.site/" />
+    </head>
+""", unsafe_allow_html=True)
+
 st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
 
 st.query_params["pages"] = "home"
@@ -81,6 +94,8 @@ st.markdown("""
     width: 100% !important;
 }
 """, unsafe_allow_html=True)
+
+
 
 # 웹페이지에 로고 삽입
 st.logo('image/logo.png', size = 'Large', icon_image = 'image/logo.png')
