@@ -3,6 +3,10 @@ import os
 from streamlit_navigation_bar import st_navbar
 import pages as pg  
 
+st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
+
+st.query_params["pages"] = "home"
+
 # HTML 메타 태그 설정
 st.markdown("""
     <head>
@@ -15,10 +19,6 @@ st.markdown("""
         <meta property="og:url" content="https://soccerly.site/" />
     </head>
 """, unsafe_allow_html=True)
-
-st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
-
-st.query_params["pages"] = "home"
 
 # ✅ 스크롤 문제 해결 (iPhone Safari 대응)
 st.markdown("""
