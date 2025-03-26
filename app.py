@@ -194,6 +194,15 @@ st.markdown("""
     <meta name="robots" content="index, follow">
 """, unsafe_allow_html=True)
 
+# sitemap.xml 서빙 코드 추가
+if st.query_params.get("sitemap") == "xml":
+    sitemap_path = "sitemap.xml"  # 루트에 있는 파일
+    if os.path.exists(sitemap_path):
+        with open(sitemap_path, "r", encoding="utf-8") as file:
+            st.text(file.read())  # XML 파일 내용 반환
+    else:
+        st.error("Sitemap 파일을 찾을 수 없습니다.")
+
 # 선택한 페이지의 함수를 호출하여 해당 페이지 내용 표시
 go_to = functions.get(page)
 if go_to:
