@@ -174,4 +174,7 @@ cython_debug/
 *.pem
 *.ppk
 
+# Anaconda installer
+Anaconda3-2024.02-1-Linux-x86_64.sh
+
 nohup.out
