@@ -131,8 +131,8 @@ def filter_page():
     if selected_features:
         filtered_df = filtered_df[filtered_df["feature"].isin(selected_features)]
 
-    LINK_COUNT_FILE = ".data/link_counts.csv"  # 검색 횟수를 저장할 파일
-
+    LINK_COUNT_FILE = "./data/link_counts.csv"  # 검색 횟수를 저장할 파일
+    
     # 🔹 검색 횟수 로드 함수
     def load_link_counts():
         try:
