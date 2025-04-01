@@ -183,8 +183,10 @@ def filter_page():
                         st.session_state["modal_data"] = row  # 선택된 데이터 저장
                         modal.open()  # 모달 열기
                 with col3:
-                    if pd.notna(row['url']):
-                        st.link_button('제품 링크', row['url'], key=f"link_{row['title']}")
+                    if pd.notna(row["url"]):
+                        st.link_button("제품 링크", row["url"])  # key 제거
+                    else:
+                        st.write("🔗 제품 링크: ❌")
 
                 # 구분선 추가
                 st.markdown(
