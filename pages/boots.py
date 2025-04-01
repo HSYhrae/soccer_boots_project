@@ -20,9 +20,12 @@ if "sort_order" not in st.session_state:
 if "page_number" not in st.session_state:
     st.session_state["page_number"] = 1
 
+<<<<<<< HEAD
 # 링크 기록 파일 경로
 LINK_COUNT_FILE = "./data/link_counts.csv"  # 검색 횟수를 저장할 파일
 
+=======
+>>>>>>> origin/main
 # 필터링 페이지
 def filter_page():
     # Session State가 없을 경우 초기화
@@ -133,6 +136,11 @@ def filter_page():
     # 특징 필터 적용
     if selected_features:
         filtered_df = filtered_df[filtered_df["feature"].isin(selected_features)]
+<<<<<<< HEAD
+=======
+
+    LINK_COUNT_FILE = "./data/link_counts.csv"  # 검색 횟수를 저장할 파일
+>>>>>>> origin/main
     
     # 🔹 검색 횟수 로드 함수
     def load_link_counts():
@@ -235,6 +243,10 @@ def filter_page():
                     weight_display = f"⚖️ 무게: {row['weight(g)']}g" if pd.notna(row['weight(g)']) else "⚖️ 무게: ❌"
                     length_display = f"📏 길이: {row['len_score']}" if pd.notna(row['len_score']) else "📏 길이: ❌"
                     foot_display = f"🦶 발폭: {row['foot_score']}" if pd.notna(row['foot_score']) else "🦶 발폭: ❌"
+<<<<<<< HEAD
+=======
+                    url_display = f"[🔗 제품 링크]({row['url']})" if pd.notna(row['url']) else "🔗 제품 링크: ❌"
+>>>>>>> origin/main
 
                     # 각 정보 출력
                     st.write(price_display)
@@ -243,6 +255,10 @@ def filter_page():
                     st.write(weight_display)
                     st.write(length_display)
                     st.write(foot_display)
+<<<<<<< HEAD
+=======
+                    st.write(url_display)
+>>>>>>> origin/main
 
     else:
         st.write("❌ 해당 조건에 맞는 축구화가 없습니다.")
