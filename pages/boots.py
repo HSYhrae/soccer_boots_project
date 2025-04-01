@@ -225,6 +225,15 @@ def filter_page():
                     else:
                         st.write("🔗 제품 링크: ❌")
 
+
+                # 구분선 추가
+                st.markdown(
+                    """
+                    <hr style="border: 1px solid lightgray; margin: 10px 0;">
+                    """,
+                    unsafe_allow_html=True
+                )
+
         # 모달 창 (모달이 열릴 때만 데이터 표시)
         if modal.is_open():
             with modal.container():
