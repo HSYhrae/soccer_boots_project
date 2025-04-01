@@ -206,11 +206,18 @@ def filter_page():
                         modal.open()  # 모달 열기
                 with col3:
                     if pd.notna(row["url"]):
-                        st.write(' ')
-                        if st.button("제품 링크", key=f"link_{row['title']}"):  # 🔹 버튼 클릭 시
-                            update_product_click_count(row["title"])  # 🔹 클릭 횟수 업데이트
-                            link = f'<a href="{row["url"]}" target="_blank"><button style="background-color: #4CAF50; color: white; border: none; padding: 8px 16px; cursor: pointer;">제품 링크</button></a>'
-                            st.markdown(link, unsafe_allow_html=True)
+                        if pd.notna(row["url"]):
+                            st.write(' ')
+                            
+                            # 클릭 횟수 업데이트
+                            if st.session_state.get(f"clicked_{row['title']}", False) is False:
+                                if st.button(f"제품 링크", key=f"link_{row['title']}"):  # 버튼 클릭 시
+                                    update_product_click_count(row["title"])  # 클릭 횟수 업데이트
+                                    st.session_state[f"clicked_{row['title']}"] = True  # 클릭 상태 저장
+                                    
+                                    # 새 탭에서 링크 열기
+                                    js = f"window.open('{row['url']}', '_blank')"
+                                    st.markdown(f'<script>{js}</script>', unsafe_allow_html=True)
                             # st.markdown(f'<meta http-equiv="refresh" content="0; url={row["url"]}">', unsafe_allow_html=True)  # 링크 열기
                     else:
                         st.write("🔗 제품 링크: ❌")
