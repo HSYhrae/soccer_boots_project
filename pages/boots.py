@@ -185,8 +185,6 @@ def filter_page():
                 with col3:
                     if pd.notna(row['url']):
                         st.link_button('제품 링크', row['url'], key=f"link_{row['title']}")
-                    else:
-                        "🔗 제품 링크: ❌"
 
                 # 구분선 추가
                 st.markdown(
