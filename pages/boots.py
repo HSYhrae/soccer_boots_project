@@ -215,17 +215,15 @@ def filter_page():
                             # 새 탭에서 링크 열기
                             js = f"window.open('{row['url']}', '_blank')"
                             st.markdown(f'<script>{js}</script>', unsafe_allow_html=True)
-                        # st.markdown(f'<meta http-equiv="refresh" content="0; url={row["url"]}">', unsafe_allow_html=True)  # 링크 열기
+                            
+                            # 클릭 상태를 저장
+                            st.session_state[f"clicked_{row['title']}"] = True
+                            
+                        # 클릭 상태 확인
+                        if st.session_state.get(f"clicked_{row['title']}", False):
+                            st.write("링크가 열렸습니다.")  # 사용자에게 링크가 열렸음을 알림
                     else:
                         st.write("🔗 제품 링크: ❌")
-
-                # 구분선 추가
-                st.markdown(
-                    """
-                    <hr style="border: 1px solid lightgray; margin: 10px 0;">
-                    """,
-                    unsafe_allow_html=True
-                )
 
         # 모달 창 (모달이 열릴 때만 데이터 표시)
         if modal.is_open():
