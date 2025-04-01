@@ -209,7 +209,8 @@ def filter_page():
                         st.write(' ')
                         if st.button("제품 링크", key=f"link_{row['title']}"):  # 🔹 버튼 클릭 시
                             update_product_click_count(row["title"])  # 🔹 클릭 횟수 업데이트
-                            st.markdown(f'<a href="{row["url"]}" target="_blank">제품 링크 열기</a>', unsafe_allow_html=True)
+                            link = f'<a href="{row["url"]}" target="_blank"><button style="background-color: #4CAF50; color: white; border: none; padding: 8px 16px; cursor: pointer;">제품 링크</button></a>'
+                            st.markdown(link, unsafe_allow_html=True)
                             # st.markdown(f'<meta http-equiv="refresh" content="0; url={row["url"]}">', unsafe_allow_html=True)  # 링크 열기
                     else:
                         st.write("🔗 제품 링크: ❌")
