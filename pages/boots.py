@@ -171,7 +171,7 @@ def filter_page():
     if not filtered_df.empty:
         for _, row in paginated_df.iterrows():  # ⬅️ `paginated_df` 사용
             with st.container():
-                col1, col2 = st.columns([1, 3])  # 비율로 열 크기 조정
+                col1, col2, col3 = st.columns([1, 3, 1])  # 비율로 열 크기 조정
                 with col1:
                     st.image(row["image_url"], width=100)
                 with col2:
