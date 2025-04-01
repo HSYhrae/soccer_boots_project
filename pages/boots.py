@@ -131,6 +131,27 @@ def filter_page():
     if selected_features:
         filtered_df = filtered_df[filtered_df["feature"].isin(selected_features)]
 
+    LINK_COUNT_FILE = "link_counts.csv"  # 검색 횟수를 저장할 파일
+
+    # 🔹 검색 횟수 로드 함수
+    def load_link_counts():
+        try:
+            return pd.read_csv(LINK_COUNT_FILE)
+        except FileNotFoundError:
+            return pd.DataFrame(columns=["제품명", "클릭 횟수"])  # 초기 파일이 없을 경우 빈 데이터프레임 반환
+
+    # 🔹 검색 횟수 업데이트 함수
+    def update_product_click_count(product_name):
+        link_df = load_link_counts()
+        
+        if product_name in link_df["제품명"].values:
+            link_df.loc[link_df["제품명"] == product_name, "클릭 횟수"] += 1
+        else:
+            new_data = pd.DataFrame({"제품명": [product_name], "클릭 횟수": [1]})
+            link_df = pd.concat([link_df, new_data], ignore_index=True)
+        
+        link_df.to_csv(LINK_COUNT_FILE, index=False)
+
     # 정렬 옵션 버튼 추가
     col_sort1, col_sort2, col_sort3, col_sort4 = st.columns(4)
     with col_sort1:
@@ -184,7 +205,10 @@ def filter_page():
                         modal.open()  # 모달 열기
                 with col3:
                     if pd.notna(row["url"]):
-                        st.link_button("제품 링크", row["url"])  # key 제거
+                        st.write(' ')
+                        if st.button("제품 링크", key=f"link_{row['title']}"):  # 🔹 버튼 클릭 시
+                            update_product_click_count(row["title"])  # 🔹 클릭 횟수 업데이트
+                            st.markdown(f"[제품 링크]({row['url']})", unsafe_allow_html=True)  # 링크 열기
                     else:
                         st.write("🔗 제품 링크: ❌")
 
