@@ -131,7 +131,7 @@ def filter_page():
     if selected_features:
         filtered_df = filtered_df[filtered_df["feature"].isin(selected_features)]
 
-    LINK_COUNT_FILE = "link_counts.csv"  # 검색 횟수를 저장할 파일
+    LINK_COUNT_FILE = ".data/link_counts.csv"  # 검색 횟수를 저장할 파일
 
     # 🔹 검색 횟수 로드 함수
     def load_link_counts():
@@ -208,7 +208,7 @@ def filter_page():
                         st.write(' ')
                         if st.button("제품 링크", key=f"link_{row['title']}"):  # 🔹 버튼 클릭 시
                             update_product_click_count(row["title"])  # 🔹 클릭 횟수 업데이트
-                            st.markdown(f"[제품 링크]({row['url']})", unsafe_allow_html=True)  # 링크 열기
+                            st.markdown(f'<meta http-equiv="refresh" content="0; url={row["url"]}">', unsafe_allow_html=True)  # 링크 열기
                     else:
                         st.write("🔗 제품 링크: ❌")
 
