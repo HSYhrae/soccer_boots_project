@@ -20,12 +20,9 @@ if "sort_order" not in st.session_state:
 if "page_number" not in st.session_state:
     st.session_state["page_number"] = 1
 
-<<<<<<< HEAD
 # 링크 기록 파일 경로
 LINK_COUNT_FILE = "./data/link_counts.csv"  # 검색 횟수를 저장할 파일
 
-=======
->>>>>>> origin/main
 # 필터링 페이지
 def filter_page():
     # Session State가 없을 경우 초기화
