@@ -209,9 +209,13 @@ def filter_page():
                         st.write(' ')
                         
                         # 클릭 횟수 업데이트
-                        if st.button("제품 링크", key=f"link_{row['title']}"):  # 🔹 버튼 클릭 시
-                            update_product_click_count(row["title"])  # 🔹 클릭 횟수 업데이트
-                            st.markdown(f'<a href="{row["url"]}" target="_blank">제품 링크 열기</a>', unsafe_allow_html=True)
+                        if st.link_button('제품 링크', row['url'], key=f'link_{row['title']}'):
+                            update_product_click_count(row["title"])
+
+
+                        # if st.button("제품 링크", key=f"link_{row['title']}"):  # 🔹 버튼 클릭 시
+                        #     update_product_click_count(row["title"])  # 🔹 클릭 횟수 업데이트
+                        #     st.markdown(f'<a href="{row["url"]}" target="_blank">제품 링크 열기</a>', unsafe_allow_html=True)
 
 
                 # 구분선 추가
