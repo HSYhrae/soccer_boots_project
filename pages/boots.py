@@ -209,7 +209,7 @@ def filter_page():
                         st.write(' ')
                         
                         # 클릭 횟수 업데이트
-                        if st.link_button('제품 링크', row['url'], key=f"link_{row['title']}"):
+                        if st.link_button('제품 링크', row['url']):
                             update_product_click_count(row["title"])
 
 
