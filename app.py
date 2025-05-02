@@ -17,6 +17,7 @@ st.markdown("""
         <meta property="og:description" content="가격, 브랜드, 특징별로 나에게 맞는 축구화를 찾아보세요!" />
         <meta property="og:image" content="https://soccerly.site/static/logo.png" />
         <meta property="og:url" content="https://soccerly.site/" />
+        <meta name="naver-site-verification" content="846d4d509eb7805d3d72ec76d0a6a5936f5b1f20" />
     </head>
 """, unsafe_allow_html=True)
 
