@@ -7,7 +7,7 @@ import streamlit as st
 
 def add_analytics_tag():
     # 🔹 여기에 본인의 Google Analytics 측정 ID를 입력하세요!
-    analytics_id = "G-NR4T79QW82"
+    analytics_id = "G-H96KS0SE20"
 
     analytics_js = f"""
     <!-- Global site tag (gtag.js) - Google Analytics -->
