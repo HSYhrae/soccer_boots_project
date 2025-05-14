@@ -211,9 +211,7 @@ def filter_page():
                             st.session_state["modal_data"] = row  # 선택된 데이터 저장
                             st.session_state["modal_open"] = True
 
-                        # 모달 상태 확인
-                        if st.session_state.get("modal_open", False):
-                            modal.open()
+                        
                     with col3:
                         if pd.notna(row["url"]):
                             st.write(" ")
@@ -233,7 +231,9 @@ def filter_page():
                         """,
                         unsafe_allow_html=True
                     )
-
+        # 모달 상태 확인
+        if st.session_state.get("modal_open", False):
+            modal.open()
         # 모달 창 (모달이 열릴 때만 데이터 표시)
         if modal.is_open():
             with modal.container():
