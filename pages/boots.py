@@ -204,7 +204,7 @@ def filter_page():
                         st.image(row["image_url"], width=100)
                     with col2:
                         st.markdown(f"<p style='margin: 0; font-size: 16px;'>{row['title']}</p>", unsafe_allow_html=True)
-                        st.markdown(f"<p style='margin: 2px 0; font-size: 14px;'>가격: {row['sale_price']}원</p>", unsafe_allow_html=True)
+                        st.markdown(f"<p style='margin: 2px 0; font-size: 14px;'>가격: {int(row['sale_price']):,}원</p>", unsafe_allow_html=True)
 
                         # 팝업 창 열기 버튼
                         if st.button(f"자세한 정보 보기", key=f"modal_{row['title']}"):
@@ -238,7 +238,7 @@ def filter_page():
                         st.image(row["image_url"], width=200)
                         st.write(f"### {row['title']}")
                         # 각 정보의 존재 여부에 따라 표시
-                        price_display = f"💰 가격: {row['sale_price']}원" if pd.notna(row['sale_price']) else "💰 가격: ❌"
+                        price_display = f"💰 가격: {int(row['sale_price']):,}원" if pd.notna(row['sale_price']) else "💰 가격: ❌"
                         upper_display = f"👟 소재: {row['upper']}" if pd.notna(row['upper']) else "👟 소재: ❌"
                         ground_display = f"🏟️ 바닥 재질: {row['ground']}" if pd.notna(row['ground']) else "🏟️ 바닥 재질: ❌"
                         weight_display = f"⚖️ 무게: {row['weight(g)']}g" if pd.notna(row['weight(g)']) else "⚖️ 무게: ❌"
