@@ -209,7 +209,11 @@ def filter_page():
                         # 팝업 창 열기 버튼
                         if st.button(f"자세한 정보 보기", key=f"modal_{row['title']}"):
                             st.session_state["modal_data"] = row  # 선택된 데이터 저장
-                            modal.open()  # 모달 열기
+                            st.session_state["modal_open"] = True
+
+                        # 모달 상태 확인
+                        if st.session_state.get("modal_open", False):
+                            modal.open()
                     with col3:
                         if pd.notna(row["url"]):
                             st.write(" ")
@@ -254,6 +258,7 @@ def filter_page():
                     st.write(foot_display)
 
         else:
+            st.session_state["modal_open"] = False
             st.write("❌ 해당 조건에 맞는 축구화가 없습니다.")
         
         # 페이지네이션 UI (가운데 정렬)
