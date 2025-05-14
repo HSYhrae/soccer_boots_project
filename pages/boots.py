@@ -159,6 +159,35 @@ def filter_page():
             
             link_df.to_csv(LINK_COUNT_FILE, index=False)
 
+        # 페이지네이션 적용
+        items_per_page = 10
+        total_pages = max(1, -(-len(filtered_df) // items_per_page))  # 최소 1페이지 보장
+        current_page = min(st.session_state["page_number"], total_pages)  # 현재 페이지가 total_pages를 초과하지 않도록 보정
+
+        start_idx = (current_page - 1) * items_per_page
+        end_idx = start_idx + items_per_page
+        paginated_df = filtered_df.iloc[start_idx:end_idx]
+
+        # 페이지네이션 UI (가운데 정렬)
+        col_center = st.columns(1)[0]  # 중앙 정렬을 위한 단일 컬럼
+
+        with col_center:
+            col_prev, col_page, col_next = st.columns([1, 3, 1])  # 이전 버튼, 페이지 번호, 다음 버튼 정렬
+
+            with col_prev:
+                if st.button("⬅️ 이전", key="prev_page") and st.session_state["page_number"] > 1:
+                    st.session_state["page_number"] -= 1
+
+            with col_page:
+                st.markdown(
+                    f"<h5 style='text-align: center;'>{st.session_state['page_number']} / {total_pages}</h5>",
+                    unsafe_allow_html=True
+                )
+
+            with col_next:
+                if st.button("다음 ➡️", key="next_page") and st.session_state["page_number"] < total_pages:
+                    st.session_state["page_number"] += 1
+
         # 정렬 옵션 버튼 추가
         col_sort1, col_sort2, col_sort3, col_sort4 = st.columns(4)
         with col_sort1:
@@ -183,15 +212,6 @@ def filter_page():
             filtered_df = filtered_df.sort_values(by="sale_price", ascending=True)
         elif st.session_state["sort_order"] == "높은 가격순":
             filtered_df = filtered_df.sort_values(by="sale_price", ascending=False)
-        
-        # 페이지네이션 적용
-        items_per_page = 10
-        total_pages = max(1, -(-len(filtered_df) // items_per_page))  # 최소 1페이지 보장
-        current_page = min(st.session_state["page_number"], total_pages)  # 현재 페이지가 total_pages를 초과하지 않도록 보정
-
-        start_idx = (current_page - 1) * items_per_page
-        end_idx = start_idx + items_per_page
-        paginated_df = filtered_df.iloc[start_idx:end_idx]
 
         # 필터링 결과 출력
         st.subheader("🔍 검색 결과")
@@ -208,8 +228,9 @@ def filter_page():
 
                         # 팝업 창 열기 버튼
                         if st.button(f"자세한 정보 보기", key=f"modal_{row['title']}"):
-                            st.session_state["modal_data"] = row  # 선택된 데이터 저장
+                            st.session_state["modal_data"] = row
                             st.session_state["modal_open"] = True
+                            st.rerun()
 
                         
                     with col3:
@@ -261,25 +282,7 @@ def filter_page():
             st.session_state["modal_open"] = False
             st.write("❌ 해당 조건에 맞는 축구화가 없습니다.")
         
-        # 페이지네이션 UI (가운데 정렬)
-        col_center = st.columns(1)[0]  # 중앙 정렬을 위한 단일 컬럼
-
-        with col_center:
-            col_prev, col_page, col_next = st.columns([1, 3, 1])  # 이전 버튼, 페이지 번호, 다음 버튼 정렬
-
-            with col_prev:
-                if st.button("⬅️ 이전", key="prev_page") and st.session_state["page_number"] > 1:
-                    st.session_state["page_number"] -= 1
-
-            with col_page:
-                st.markdown(
-                    f"<h5 style='text-align: center;'>{st.session_state['page_number']} / {total_pages}</h5>",
-                    unsafe_allow_html=True
-                )
-
-            with col_next:
-                if st.button("다음 ➡️", key="next_page") and st.session_state["page_number"] < total_pages:
-                    st.session_state["page_number"] += 1
+        
 
 
 def show_boots():
