@@ -73,9 +73,9 @@ def filter_page():
     # 👉 검색 버튼을 눌렀을 때만 필터 적용
     if apply_filter:
 
-    # 제목 검색 필터 적용
-    if search_title:
-        filtered_df = filtered_df[filtered_df['title'].str.contains(search_title, case=False)]
+        # 제목 검색 필터 적용
+        if search_title:
+            filtered_df = filtered_df[filtered_df['title'].str.contains(search_title, case=False)]
 
         # 가격대 필터 적용
         if selected_price:
