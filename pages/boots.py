@@ -230,28 +230,28 @@ def filter_page():
                         unsafe_allow_html=True
                     )
 
-            # 모달 창 (모달이 열릴 때만 데이터 표시)
-            if modal.is_open():
-                with modal.container():
-                    row = st.session_state.get("modal_data", None)
-                    if row is not None:
-                        st.image(row["image_url"], width=200)
-                        st.write(f"### {row['title']}")
-                        # 각 정보의 존재 여부에 따라 표시
-                        price_display = f"💰 가격: {int(row['sale_price']):,}원" if pd.notna(row['sale_price']) else "💰 가격: ❌"
-                        upper_display = f"👟 소재: {row['upper']}" if pd.notna(row['upper']) else "👟 소재: ❌"
-                        ground_display = f"🏟️ 바닥 재질: {row['ground']}" if pd.notna(row['ground']) else "🏟️ 바닥 재질: ❌"
-                        weight_display = f"⚖️ 무게: {row['weight(g)']}g" if pd.notna(row['weight(g)']) else "⚖️ 무게: ❌"
-                        length_display = f"📏 길이: {row['len_score']}" if pd.notna(row['len_score']) else "📏 길이: ❌"
-                        foot_display = f"🦶 발폭: {row['foot_score']}" if pd.notna(row['foot_score']) else "🦶 발폭: ❌"
+        # 모달 창 (모달이 열릴 때만 데이터 표시)
+        if modal.is_open():
+            with modal.container():
+                row = st.session_state.get("modal_data", None)
+                if row is not None:
+                    st.image(row["image_url"], width=200)
+                    st.write(f"### {row['title']}")
+                    # 각 정보의 존재 여부에 따라 표시
+                    price_display = f"💰 가격: {int(row['sale_price']):,}원" if pd.notna(row['sale_price']) else "💰 가격: ❌"
+                    upper_display = f"👟 소재: {row['upper']}" if pd.notna(row['upper']) else "👟 소재: ❌"
+                    ground_display = f"🏟️ 바닥 재질: {row['ground']}" if pd.notna(row['ground']) else "🏟️ 바닥 재질: ❌"
+                    weight_display = f"⚖️ 무게: {row['weight(g)']}g" if pd.notna(row['weight(g)']) else "⚖️ 무게: ❌"
+                    length_display = f"📏 길이: {row['len_score']}" if pd.notna(row['len_score']) else "📏 길이: ❌"
+                    foot_display = f"🦶 발폭: {row['foot_score']}" if pd.notna(row['foot_score']) else "🦶 발폭: ❌"
 
-                        # 각 정보 출력
-                        st.write(price_display)
-                        st.write(upper_display)
-                        st.write(ground_display)
-                        st.write(weight_display)
-                        st.write(length_display)
-                        st.write(foot_display)
+                    # 각 정보 출력
+                    st.write(price_display)
+                    st.write(upper_display)
+                    st.write(ground_display)
+                    st.write(weight_display)
+                    st.write(length_display)
+                    st.write(foot_display)
 
         else:
             st.write("❌ 해당 조건에 맞는 축구화가 없습니다.")
