@@ -140,141 +140,141 @@ def filter_page():
         if selected_features:
             filtered_df = filtered_df[filtered_df["feature"].isin(selected_features)]
     
-    # 🔹 검색 횟수 로드 함수
-    def load_link_counts():
-        try:
-            return pd.read_csv(LINK_COUNT_FILE)
-        except FileNotFoundError:
-            return pd.DataFrame(columns=["제품명", "클릭 횟수"])  # 초기 파일이 없을 경우 빈 데이터프레임 반환
+        # 🔹 검색 횟수 로드 함수
+        def load_link_counts():
+            try:
+                return pd.read_csv(LINK_COUNT_FILE)
+            except FileNotFoundError:
+                return pd.DataFrame(columns=["제품명", "클릭 횟수"])  # 초기 파일이 없을 경우 빈 데이터프레임 반환
 
-    # 🔹 검색 횟수 업데이트 함수
-    def update_product_click_count(product_name):
-        link_df = load_link_counts()
+        # 🔹 검색 횟수 업데이트 함수
+        def update_product_click_count(product_name):
+            link_df = load_link_counts()
+            
+            if product_name in link_df["제품명"].values:
+                link_df.loc[link_df["제품명"] == product_name, "클릭 횟수"] += 1
+            else:
+                new_data = pd.DataFrame({"제품명": [product_name], "클릭 횟수": [1]})
+                link_df = pd.concat([link_df, new_data], ignore_index=True)
+            
+            link_df.to_csv(LINK_COUNT_FILE, index=False)
+
+        # 정렬 옵션 버튼 추가
+        col_sort1, col_sort2, col_sort3, col_sort4 = st.columns(4)
+        with col_sort1:
+            if st.button("가나다순"):
+                st.session_state["sort_order"] = "가나다순"
+        with col_sort2:
+            if st.button("가나다 역순"):
+                st.session_state["sort_order"] = "가나다 역순"
+        with col_sort3:
+            if st.button("낮은 가격순"):
+                st.session_state["sort_order"] = "낮은 가격순"
+        with col_sort4:
+            if st.button("높은 가격순"):
+                st.session_state["sort_order"] = "높은 가격순"
+
+        # 정렬 적용
+        if st.session_state["sort_order"] == "가나다순":
+            filtered_df = filtered_df.sort_values(by="title", ascending=True)
+        elif st.session_state["sort_order"] == "가나다 역순":
+            filtered_df = filtered_df.sort_values(by="title", ascending=False)
+        elif st.session_state["sort_order"] == "낮은 가격순":
+            filtered_df = filtered_df.sort_values(by="sale_price", ascending=True)
+        elif st.session_state["sort_order"] == "높은 가격순":
+            filtered_df = filtered_df.sort_values(by="sale_price", ascending=False)
         
-        if product_name in link_df["제품명"].values:
-            link_df.loc[link_df["제품명"] == product_name, "클릭 횟수"] += 1
+        # 페이지네이션 적용
+        items_per_page = 10
+        total_pages = max(1, -(-len(filtered_df) // items_per_page))  # 최소 1페이지 보장
+        current_page = min(st.session_state["page_number"], total_pages)  # 현재 페이지가 total_pages를 초과하지 않도록 보정
+
+        start_idx = (current_page - 1) * items_per_page
+        end_idx = start_idx + items_per_page
+        paginated_df = filtered_df.iloc[start_idx:end_idx]
+
+        # 필터링 결과 출력
+        st.subheader("🔍 검색 결과")
+
+        if not filtered_df.empty:
+            for _, row in paginated_df.iterrows():  # ⬅️ `paginated_df` 사용
+                with st.container():
+                    col1, col2, col3 = st.columns([1, 3, 1])  # 비율로 열 크기 조정
+                    with col1:
+                        st.image(row["image_url"], width=100)
+                    with col2:
+                        st.markdown(f"<p style='margin: 0; font-size: 16px;'>{row['title']}</p>", unsafe_allow_html=True)
+                        st.markdown(f"<p style='margin: 2px 0; font-size: 14px;'>가격: {row['sale_price']}원</p>", unsafe_allow_html=True)
+
+                        # 팝업 창 열기 버튼
+                        if st.button(f"자세한 정보 보기", key=f"modal_{row['title']}"):
+                            st.session_state["modal_data"] = row  # 선택된 데이터 저장
+                            modal.open()  # 모달 열기
+                    with col3:
+                        if pd.notna(row["url"]):
+                            st.write(" ")
+                            if st.link_button("제품 링크", row["url"]):
+                                update_product_click_count(row["title"])
+
+
+                            # if st.button("제품 링크", key=f"link_{row['title']}"):  # 🔹 버튼 클릭 시
+                            #     update_product_click_count(row["title"])  # 🔹 클릭 횟수 업데이트
+                            #     st.markdown(f'<a href="{row["url"]}" target="_blank">제품 링크 열기</a>', unsafe_allow_html=True)
+
+
+                    # 구분선 추가
+                    st.markdown(
+                        """
+                        <hr style="border: 1px solid lightgray; margin: 10px 0;">
+                        """,
+                        unsafe_allow_html=True
+                    )
+
+            # 모달 창 (모달이 열릴 때만 데이터 표시)
+            if modal.is_open():
+                with modal.container():
+                    row = st.session_state.get("modal_data", None)
+                    if row is not None:
+                        st.image(row["image_url"], width=200)
+                        st.write(f"### {row['title']}")
+                        # 각 정보의 존재 여부에 따라 표시
+                        price_display = f"💰 가격: {row['sale_price']}원" if pd.notna(row['sale_price']) else "💰 가격: ❌"
+                        upper_display = f"👟 소재: {row['upper']}" if pd.notna(row['upper']) else "👟 소재: ❌"
+                        ground_display = f"🏟️ 바닥 재질: {row['ground']}" if pd.notna(row['ground']) else "🏟️ 바닥 재질: ❌"
+                        weight_display = f"⚖️ 무게: {row['weight(g)']}g" if pd.notna(row['weight(g)']) else "⚖️ 무게: ❌"
+                        length_display = f"📏 길이: {row['len_score']}" if pd.notna(row['len_score']) else "📏 길이: ❌"
+                        foot_display = f"🦶 발폭: {row['foot_score']}" if pd.notna(row['foot_score']) else "🦶 발폭: ❌"
+
+                        # 각 정보 출력
+                        st.write(price_display)
+                        st.write(upper_display)
+                        st.write(ground_display)
+                        st.write(weight_display)
+                        st.write(length_display)
+                        st.write(foot_display)
+
         else:
-            new_data = pd.DataFrame({"제품명": [product_name], "클릭 횟수": [1]})
-            link_df = pd.concat([link_df, new_data], ignore_index=True)
+            st.write("❌ 해당 조건에 맞는 축구화가 없습니다.")
         
-        link_df.to_csv(LINK_COUNT_FILE, index=False)
+        # 페이지네이션 UI (가운데 정렬)
+        col_center = st.columns(1)[0]  # 중앙 정렬을 위한 단일 컬럼
 
-    # 정렬 옵션 버튼 추가
-    col_sort1, col_sort2, col_sort3, col_sort4 = st.columns(4)
-    with col_sort1:
-        if st.button("가나다순"):
-            st.session_state["sort_order"] = "가나다순"
-    with col_sort2:
-        if st.button("가나다 역순"):
-            st.session_state["sort_order"] = "가나다 역순"
-    with col_sort3:
-        if st.button("낮은 가격순"):
-            st.session_state["sort_order"] = "낮은 가격순"
-    with col_sort4:
-        if st.button("높은 가격순"):
-            st.session_state["sort_order"] = "높은 가격순"
+        with col_center:
+            col_prev, col_page, col_next = st.columns([1, 3, 1])  # 이전 버튼, 페이지 번호, 다음 버튼 정렬
 
-    # 정렬 적용
-    if st.session_state["sort_order"] == "가나다순":
-        filtered_df = filtered_df.sort_values(by="title", ascending=True)
-    elif st.session_state["sort_order"] == "가나다 역순":
-        filtered_df = filtered_df.sort_values(by="title", ascending=False)
-    elif st.session_state["sort_order"] == "낮은 가격순":
-        filtered_df = filtered_df.sort_values(by="sale_price", ascending=True)
-    elif st.session_state["sort_order"] == "높은 가격순":
-        filtered_df = filtered_df.sort_values(by="sale_price", ascending=False)
-    
-    # 페이지네이션 적용
-    items_per_page = 10
-    total_pages = max(1, -(-len(filtered_df) // items_per_page))  # 최소 1페이지 보장
-    current_page = min(st.session_state["page_number"], total_pages)  # 현재 페이지가 total_pages를 초과하지 않도록 보정
+            with col_prev:
+                if st.button("⬅️ 이전", key="prev_page") and st.session_state["page_number"] > 1:
+                    st.session_state["page_number"] -= 1
 
-    start_idx = (current_page - 1) * items_per_page
-    end_idx = start_idx + items_per_page
-    paginated_df = filtered_df.iloc[start_idx:end_idx]
-
-    # 필터링 결과 출력
-    st.subheader("🔍 검색 결과")
-
-    if not filtered_df.empty:
-        for _, row in paginated_df.iterrows():  # ⬅️ `paginated_df` 사용
-            with st.container():
-                col1, col2, col3 = st.columns([1, 3, 1])  # 비율로 열 크기 조정
-                with col1:
-                    st.image(row["image_url"], width=100)
-                with col2:
-                    st.markdown(f"<p style='margin: 0; font-size: 16px;'>{row['title']}</p>", unsafe_allow_html=True)
-                    st.markdown(f"<p style='margin: 2px 0; font-size: 14px;'>가격: {row['sale_price']}원</p>", unsafe_allow_html=True)
-
-                    # 팝업 창 열기 버튼
-                    if st.button(f"자세한 정보 보기", key=f"modal_{row['title']}"):
-                        st.session_state["modal_data"] = row  # 선택된 데이터 저장
-                        modal.open()  # 모달 열기
-                with col3:
-                    if pd.notna(row["url"]):
-                        st.write(" ")
-                        if st.link_button("제품 링크", row["url"]):
-                            update_product_click_count(row["title"])
-
-
-                        # if st.button("제품 링크", key=f"link_{row['title']}"):  # 🔹 버튼 클릭 시
-                        #     update_product_click_count(row["title"])  # 🔹 클릭 횟수 업데이트
-                        #     st.markdown(f'<a href="{row["url"]}" target="_blank">제품 링크 열기</a>', unsafe_allow_html=True)
-
-
-                # 구분선 추가
+            with col_page:
                 st.markdown(
-                    """
-                    <hr style="border: 1px solid lightgray; margin: 10px 0;">
-                    """,
+                    f"<h5 style='text-align: center;'>{st.session_state['page_number']} / {total_pages}</h5>",
                     unsafe_allow_html=True
                 )
 
-        # 모달 창 (모달이 열릴 때만 데이터 표시)
-        if modal.is_open():
-            with modal.container():
-                row = st.session_state.get("modal_data", None)
-                if row is not None:
-                    st.image(row["image_url"], width=200)
-                    st.write(f"### {row['title']}")
-                    # 각 정보의 존재 여부에 따라 표시
-                    price_display = f"💰 가격: {row['sale_price']}원" if pd.notna(row['sale_price']) else "💰 가격: ❌"
-                    upper_display = f"👟 소재: {row['upper']}" if pd.notna(row['upper']) else "👟 소재: ❌"
-                    ground_display = f"🏟️ 바닥 재질: {row['ground']}" if pd.notna(row['ground']) else "🏟️ 바닥 재질: ❌"
-                    weight_display = f"⚖️ 무게: {row['weight(g)']}g" if pd.notna(row['weight(g)']) else "⚖️ 무게: ❌"
-                    length_display = f"📏 길이: {row['len_score']}" if pd.notna(row['len_score']) else "📏 길이: ❌"
-                    foot_display = f"🦶 발폭: {row['foot_score']}" if pd.notna(row['foot_score']) else "🦶 발폭: ❌"
-
-                    # 각 정보 출력
-                    st.write(price_display)
-                    st.write(upper_display)
-                    st.write(ground_display)
-                    st.write(weight_display)
-                    st.write(length_display)
-                    st.write(foot_display)
-
-    else:
-        st.write("❌ 해당 조건에 맞는 축구화가 없습니다.")
-    
-    # 페이지네이션 UI (가운데 정렬)
-    col_center = st.columns(1)[0]  # 중앙 정렬을 위한 단일 컬럼
-
-    with col_center:
-        col_prev, col_page, col_next = st.columns([1, 3, 1])  # 이전 버튼, 페이지 번호, 다음 버튼 정렬
-
-        with col_prev:
-            if st.button("⬅️ 이전", key="prev_page") and st.session_state["page_number"] > 1:
-                st.session_state["page_number"] -= 1
-
-        with col_page:
-            st.markdown(
-                f"<h5 style='text-align: center;'>{st.session_state['page_number']} / {total_pages}</h5>",
-                unsafe_allow_html=True
-            )
-
-        with col_next:
-            if st.button("다음 ➡️", key="next_page") and st.session_state["page_number"] < total_pages:
-                st.session_state["page_number"] += 1
+            with col_next:
+                if st.button("다음 ➡️", key="next_page") and st.session_state["page_number"] < total_pages:
+                    st.session_state["page_number"] += 1
 
 
 def show_boots():
