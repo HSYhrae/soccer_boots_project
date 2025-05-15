@@ -230,7 +230,7 @@ def filter_page():
                         if st.button(f"자세한 정보 보기", key=f"modal_{row['title']}"):
                             st.session_state["modal_data"] = row
                             st.session_state["modal_open"] = True
-                            st.rerun()
+                            # st.rerun()
 
                         
                     with col3:
@@ -293,5 +293,3 @@ def show_boots():
     st.session_state.setdefault("page_number", 1)
     
     filter_page()
-
-    
