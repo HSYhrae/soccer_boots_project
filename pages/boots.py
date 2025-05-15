@@ -141,6 +141,32 @@ def filter_page():
         # 특징 필터 적용
         if selected_features:
             filtered_df = filtered_df[filtered_df["feature"].isin(selected_features)]
+
+        # 정렬 옵션 버튼 추가
+        col_sort1, col_sort2, col_sort3, col_sort4 = st.columns(4)
+        with col_sort1:
+            if st.button("가나다순"):
+                st.session_state["sort_order"] = "가나다순"
+        with col_sort2:
+            if st.button("가나다 역순"):
+                st.session_state["sort_order"] = "가나다 역순"
+        with col_sort3:
+            if st.button("낮은 가격순"):
+                st.session_state["sort_order"] = "낮은 가격순"
+        with col_sort4:
+            if st.button("높은 가격순"):
+                st.session_state["sort_order"] = "높은 가격순"
+
+        # 정렬 적용
+        if st.session_state["sort_order"] == "가나다순":
+            filtered_df = filtered_df.sort_values(by="title", ascending=True)
+        elif st.session_state["sort_order"] == "가나다 역순":
+            filtered_df = filtered_df.sort_values(by="title", ascending=False)
+        elif st.session_state["sort_order"] == "낮은 가격순":
+            filtered_df = filtered_df.sort_values(by="sale_price", ascending=True)
+        elif st.session_state["sort_order"] == "높은 가격순":
+            filtered_df = filtered_df.sort_values(by="sale_price", ascending=False)
+
     else:
         st.info("좌측 필터를 선택한 후 '검색' 버튼을 눌러주세요.")
 
@@ -162,33 +188,6 @@ def filter_page():
             link_df = pd.concat([link_df, new_data], ignore_index=True)
 
         link_df.to_csv(LINK_COUNT_FILE, index=False)
-
-    # 정렬 옵션 버튼 추가
-    col_sort1, col_sort2, col_sort3, col_sort4 = st.columns(4)
-    with col_sort1:
-        if st.button("가나다순"):
-            st.session_state["sort_order"] = "가나다순"
-    with col_sort2:
-        if st.button("가나다 역순"):
-            st.session_state["sort_order"] = "가나다 역순"
-    with col_sort3:
-        if st.button("낮은 가격순"):
-            st.session_state["sort_order"] = "낮은 가격순"
-    with col_sort4:
-        if st.button("높은 가격순"):
-            st.session_state["sort_order"] = "높은 가격순"
-
-    # 정렬 적용
-    filtered_df = df.copy()
-    
-    if st.session_state["sort_order"] == "가나다순":
-        filtered_df = filtered_df.sort_values(by="title", ascending=True)
-    elif st.session_state["sort_order"] == "가나다 역순":
-        filtered_df = filtered_df.sort_values(by="title", ascending=False)
-    elif st.session_state["sort_order"] == "낮은 가격순":
-        filtered_df = filtered_df.sort_values(by="sale_price", ascending=True)
-    elif st.session_state["sort_order"] == "높은 가격순":
-        filtered_df = filtered_df.sort_values(by="sale_price", ascending=False)
 
     # 페이지네이션 적용
     items_per_page = 10
