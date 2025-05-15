@@ -28,6 +28,7 @@ def filter_page():
     # Session State가 없을 경우 초기화
     st.session_state.setdefault("sort_order", "가나다순")
     st.session_state.setdefault("page_number", 1)
+    st.session_state.setdefault("search_clicked", False)
 
     st.title("축구화 찾기")
     st.write("👈 >를 눌러 사이드바에서 다양한 필터를 적용하세요.")
@@ -68,8 +69,6 @@ def filter_page():
     if st.sidebar.button("검색"):
         st.session_state["search_clicked"] = True
         st.session_state["page_number"] = 1
-    else:
-        st.session_state.setdefault("search_clicked", False)
 
     if st.session_state["search_clicked"]:
         # 필터링 로직 적용
@@ -166,9 +165,6 @@ def filter_page():
             filtered_df = filtered_df.sort_values(by="sale_price", ascending=True)
         elif st.session_state["sort_order"] == "높은 가격순":
             filtered_df = filtered_df.sort_values(by="sale_price", ascending=False)
-
-    else:
-        st.info("좌측 필터를 선택한 후 '검색' 버튼을 눌러주세요.")
 
     # 🔹 검색 횟수 로드 함수
     def load_link_counts():
