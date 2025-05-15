@@ -33,6 +33,8 @@ def filter_page():
     st.title("축구화 찾기")
     st.write("👈 >를 눌러 사이드바에서 다양한 필터를 적용하세요.")
 
+    filtered_df = df.copy()
+    
     # 필터링 UI (사이드바)
     st.sidebar.header("🔍 검색 옵션")
 
