@@ -179,6 +179,8 @@ def filter_page():
             st.session_state["sort_order"] = "높은 가격순"
 
     # 정렬 적용
+    filtered_df = df.copy()
+    
     if st.session_state["sort_order"] == "가나다순":
         filtered_df = filtered_df.sort_values(by="title", ascending=True)
     elif st.session_state["sort_order"] == "가나다 역순":
