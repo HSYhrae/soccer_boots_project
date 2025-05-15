@@ -64,75 +64,85 @@ def filter_page():
     feature_options = df['feature'].dropna().unique().tolist()
     selected_features = st.sidebar.multiselect("✨ 특징", feature_options)
 
-    # 필터링 로직 적용
-    filtered_df = df.copy()
+    # --- 필터 UI 끝부분에 추가 ---
+    if st.sidebar.button("검색"):
+        st.session_state["search_clicked"] = True
+        st.session_state["page_number"] = 1
+    else:
+        st.session_state.setdefault("search_clicked", False)
 
-    # 제목 검색 필터 적용
-    if search_title:
-        filtered_df = filtered_df[filtered_df['title'].str.contains(search_title, case=False)]
+    if st.session_state["search_clicked"]:
+        # 필터링 로직 적용
+        filtered_df = df.copy()
 
-    # 가격대 필터 적용
-    if selected_price:
-        price_conditions = []
-        if '10만원 미만' in selected_price:
-            price_conditions.append(filtered_df["sale_price"] < 100000)
-        if '10~15만원' in selected_price:
-            price_conditions.append(filtered_df["sale_price"].between(100000, 149999))
-        if '15~20만원' in selected_price:
-            price_conditions.append(filtered_df["sale_price"].between(150000, 199999))
-        if '20~25만원' in selected_price:
-            price_conditions.append(filtered_df["sale_price"].between(200000, 249999))
-        if '25~30만원' in selected_price:
-            price_conditions.append(filtered_df["sale_price"].between(250000, 299999))
-        if '30만원 초과' in selected_price:
-            price_conditions.append(filtered_df["sale_price"] > 300000)
-        if price_conditions:
-            filtered_df = filtered_df[pd.concat(price_conditions, axis=1).any(axis=1)]
+        # 제목 검색 필터 적용
+        if search_title:
+            filtered_df = filtered_df[filtered_df['title'].str.contains(search_title, case=False)]
 
-    # 브랜드 필터 적용
-    if selected_brand:
-        selected_brands = [key for key, value in brand_mapping.items() if value in selected_brand]
-        filtered_df = filtered_df[filtered_df["brand"].isin(selected_brands)]
+        # 가격대 필터 적용
+        if selected_price:
+            price_conditions = []
+            if '10만원 미만' in selected_price:
+                price_conditions.append(filtered_df["sale_price"] < 100000)
+            if '10~15만원' in selected_price:
+                price_conditions.append(filtered_df["sale_price"].between(100000, 149999))
+            if '15~20만원' in selected_price:
+                price_conditions.append(filtered_df["sale_price"].between(150000, 199999))
+            if '20~25만원' in selected_price:
+                price_conditions.append(filtered_df["sale_price"].between(200000, 249999))
+            if '25~30만원' in selected_price:
+                price_conditions.append(filtered_df["sale_price"].between(250000, 299999))
+            if '30만원 초과' in selected_price:
+                price_conditions.append(filtered_df["sale_price"] > 300000)
+            if price_conditions:
+                filtered_df = filtered_df[pd.concat(price_conditions, axis=1).any(axis=1)]
 
-    # 소재 필터 적용
-    if selected_upper:
-        filtered_df = filtered_df[filtered_df["upper"].apply(lambda x: set(x.split(", ")) == set(selected_upper))]    
+        # 브랜드 필터 적용
+        if selected_brand:
+            selected_brands = [key for key, value in brand_mapping.items() if value in selected_brand]
+            filtered_df = filtered_df[filtered_df["brand"].isin(selected_brands)]
 
-    # 길이 필터 적용
-    if selected_len:
-        length_mapping = {
-            'short': df['len_score'] <= 2,
-            'medium': df['len_score'] == 3,
-            'long': df['len_score'] >= 4
-        }
-        length_conditions = [length_mapping[len_type] for len_type in selected_len]
-        filtered_df = filtered_df[pd.concat(length_conditions, axis=1).any(axis=1)]
+        # 소재 필터 적용
+        if selected_upper:
+            filtered_df = filtered_df[filtered_df["upper"].apply(lambda x: set(x.split(", ")) == set(selected_upper))]    
 
-    # 발볼 필터 적용
-    if selected_foot:
-        foot_mapping = {
-            'narrow': df['foot_score'] <= 2,
-            'medium': df['foot_score'] == 3,
-            'wide': df['foot_score'] >= 4
-        }
-        foot_conditions = [foot_mapping[foot_type] for foot_type in selected_foot]
-        filtered_df = filtered_df[pd.concat(foot_conditions, axis=1).any(axis=1)]
+        # 길이 필터 적용
+        if selected_len:
+            length_mapping = {
+                'short': df['len_score'] <= 2,
+                'medium': df['len_score'] == 3,
+                'long': df['len_score'] >= 4
+            }
+            length_conditions = [length_mapping[len_type] for len_type in selected_len]
+            filtered_df = filtered_df[pd.concat(length_conditions, axis=1).any(axis=1)]
 
-    # 무게 필터 적용
-    if selected_weight:
-        weight_conditions = []
-        if 'light' in selected_weight:
-            weight_conditions.append(filtered_df["weight(g)"] < 190)
-        if 'medium' in selected_weight:
-            weight_conditions.append(filtered_df["weight(g)"].between(190, 230))
-        if 'heavy' in selected_weight:
-            weight_conditions.append(filtered_df["weight(g)"] > 230)
+        # 발볼 필터 적용
+        if selected_foot:
+            foot_mapping = {
+                'narrow': df['foot_score'] <= 2,
+                'medium': df['foot_score'] == 3,
+                'wide': df['foot_score'] >= 4
+            }
+            foot_conditions = [foot_mapping[foot_type] for foot_type in selected_foot]
+            filtered_df = filtered_df[pd.concat(foot_conditions, axis=1).any(axis=1)]
 
-        filtered_df = filtered_df[pd.concat(weight_conditions, axis=1).any(axis=1)]
+        # 무게 필터 적용
+        if selected_weight:
+            weight_conditions = []
+            if 'light' in selected_weight:
+                weight_conditions.append(filtered_df["weight(g)"] < 190)
+            if 'medium' in selected_weight:
+                weight_conditions.append(filtered_df["weight(g)"].between(190, 230))
+            if 'heavy' in selected_weight:
+                weight_conditions.append(filtered_df["weight(g)"] > 230)
 
-    # 특징 필터 적용
-    if selected_features:
-        filtered_df = filtered_df[filtered_df["feature"].isin(selected_features)]
+            filtered_df = filtered_df[pd.concat(weight_conditions, axis=1).any(axis=1)]
+
+        # 특징 필터 적용
+        if selected_features:
+            filtered_df = filtered_df[filtered_df["feature"].isin(selected_features)]
+    else:
+        st.info("좌측 필터를 선택한 후 '검색' 버튼을 눌러주세요.")
 
     # 🔹 검색 횟수 로드 함수
     def load_link_counts():
