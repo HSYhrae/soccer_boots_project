@@ -1,7 +1,10 @@
 import streamlit as st
 import pandas as pd
 import os
+from utils import insert_gtm
 
+# GTM 삽입
+insert_gtm()
 
 # 검색 기록 파일 경로
 SEARCH_COUNT_FILE = "./data/search_counts.csv"

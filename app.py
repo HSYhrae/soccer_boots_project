@@ -1,11 +1,13 @@
 import streamlit as st
 import os
 from streamlit_navigation_bar import st_navbar
-import pages as pg  
+import pages as pg
+from utils import insert_gtm
 
 st.set_page_config(page_title="Soccerly", initial_sidebar_state='auto', layout="wide")
 
 st.query_params["pages"] = "home"
+insert_gtm()
 
 # HTML 메타 태그 설정
 st.markdown("""

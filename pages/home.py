@@ -1,6 +1,9 @@
 import streamlit as st
 import pages as pg
+from utils import insert_gtm
 
+# GTM 삽입
+insert_gtm()
 
 def show_home():
     # 로고 이미지를 컬럼을 사용하여 중앙에 배치

@@ -5,6 +5,10 @@ from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import StandardScaler
 from streamlit_modal import Modal
 import numpy as np
+from utils import insert_gtm
+
+# GTM 삽입
+insert_gtm()
 
 @st.cache_data
 def load_data():
