@@ -214,11 +214,10 @@ def filter_page():
                         st.session_state["modal_data"] = row  # 선택된 데이터 저장
                         modal.open()  # 모달 열기
                 with col3:
-                    st.write('')
-                    # if pd.notna(row["url"]):
-                    #     st.write(" ")
-                    #     if st.link_button("제품 링크", row["url"]):
-                    #         update_product_click_count(row["title"])
+                    if pd.notna(row["url"]):
+                        st.write(" ")
+                        if st.link_button("제품 링크", row["url"]):
+                            update_product_click_count(row["title"])
 
                 # 구분선 추가
                 st.markdown(
@@ -242,7 +241,6 @@ def filter_page():
                     weight_display = f"⚖️ 무게: {row['weight(g)']}g" if pd.notna(row['weight(g)']) else "⚖️ 무게: ❌"
                     length_display = f"📏 길이: {row['len_score']}" if pd.notna(row['len_score']) else "📏 길이: ❌"
                     foot_display = f"🦶 발폭: {row['foot_score']}" if pd.notna(row['foot_score']) else "🦶 발폭: ❌"
-                    url_display = f"[🔗 제품 링크]({row['url']})" if pd.notna(row['url']) else "🔗 제품 링크: ❌"
 
                     # 각 정보 출력
                     st.write(price_display)
@@ -251,7 +249,6 @@ def filter_page():
                     st.write(weight_display)
                     st.write(length_display)
                     st.write(foot_display)
-                    st.write(url_display)
 
     else:
         st.write("❌ 해당 조건에 맞는 축구화가 없습니다.")
